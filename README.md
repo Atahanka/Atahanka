@@ -11,13 +11,13 @@
 
 - 👨‍💻 All of my projects are available at [**GitHub**](https://github.com/Atahanka)
 
-- 📝 I write articles on [**LinkedIn**](https://www.linkedin.com/in/atahan-karagoz)
-
 - 💬 Ask me about **AI, ML and Energy**
 
 - 📫 How to reach me [**email**](atahanka@gmail.com)
 
 - 📄 Know about my experiences [**LinkedIn**](https://www.linkedin.com/in/atahan-karagoz)
+
+- 📝 I write articles on [**LinkedIn**](https://www.linkedin.com/in/atahan-karagoz)
 
 - ⚡ Fun fact about me **I love making creative presentations to live audiences**
 
