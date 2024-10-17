@@ -1,9 +1,9 @@
 <h1 align="center">Hi 👋, I'm Atahan Karagöz</h1>
 <h3 align="center">A passionate software engineer/AI researcher in Switzerland</h3>
 
-- 🔭 I’m currently working on [**PandO**](https://github.com/Atahanka/PandO)
-
 - 🌱 I’m currently specializing in **Machine Intelligence at the University of Basel**
+
+- 🔭 I’m currently working on [**PandO**](https://github.com/Atahanka/PandO)
 
 - 👯 I’m looking to collaborate on [**BlendPhrase**](https://github.com/Atahanka/BlendPhrase)
 
