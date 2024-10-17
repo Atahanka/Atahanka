@@ -15,7 +15,7 @@
 
 - 💬 Ask me about **AI, ML and Energy**
 
-- 📫 How to reach me [email]**atahanka@gmail.com**
+- 📫 How to reach me [**email**](atahanka@gmail.com)
 
 - 📄 Know about my experiences [LinkedIn](https://www.linkedin.com/in/atahan-karagoz)
 
