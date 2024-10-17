@@ -1,23 +1,23 @@
 <h1 align="center">Hi 👋, I'm Atahan Karagöz</h1>
 <h3 align="center">A passionate software engineer/AI researcher in Switzerland</h3>
 
-- 🔭 I’m currently working on [PandO](https://github.com/Atahanka/PandO)
+- 🔭 I’m currently working on [**PandO**](https://github.com/Atahanka/PandO)
 
 - 🌱 I’m currently specializing in **Machine Intelligence at the University of Basel**
 
-- 👯 I’m looking to collaborate on [BlendPhrase](https://github.com/Atahanka/BlendPhrase)
+- 👯 I’m looking to collaborate on [**BlendPhrase**](https://github.com/Atahanka/BlendPhrase)
 
-- 🤝 I’m looking for help with [PictoSort](https://github.com/Atahanka/PictoSort)
+- 🤝 I’m looking for help with [**PictoSort**](https://github.com/Atahanka/PictoSort)
 
-- 👨‍💻 All of my projects are available at [GitHub](https://github.com/Atahanka)
+- 👨‍💻 All of my projects are available at [**GitHub**](https://github.com/Atahanka)
 
-- 📝 I write articles on [LinkedIn](https://www.linkedin.com/in/atahan-karagoz)
+- 📝 I write articles on [**LinkedIn**](https://www.linkedin.com/in/atahan-karagoz)
 
 - 💬 Ask me about **AI, ML and Energy**
 
 - 📫 How to reach me [**email**](atahanka@gmail.com)
 
-- 📄 Know about my experiences [LinkedIn](https://www.linkedin.com/in/atahan-karagoz)
+- 📄 Know about my experiences [**LinkedIn**](https://www.linkedin.com/in/atahan-karagoz)
 
 - ⚡ Fun fact **I love making creative presentations to live audiences**
 
