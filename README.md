@@ -9,15 +9,15 @@
 
 - 🤝 I’m looking for help with [PictoSort](https://github.com/Atahanka/PictoSort)
 
-- 👨‍💻 All of my projects are available at [https://github.com/Atahanka](https://github.com/Atahanka)
+- 👨‍💻 All of my projects are available at [GitHub](https://github.com/Atahanka)
 
-- 📝 I write articles on [https://www.linkedin.com/in/atahan-karagoz](https://www.linkedin.com/in/atahan-karagoz)
+- 📝 I write articles on [LinkedIn](https://www.linkedin.com/in/atahan-karagoz)
 
 - 💬 Ask me about **AI, ML and Energy**
 
 - 📫 How to reach me **atahanka@gmail.com**
 
-- 📄 Know about my experiences [linkedin](https://www.linkedin.com/in/atahan-karagoz)
+- 📄 Know about my experiences [LinkedIn](https://www.linkedin.com/in/atahan-karagoz)
 
 - ⚡ Fun fact **I love making creative presentations to live audiences**
 
