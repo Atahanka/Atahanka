@@ -17,7 +17,7 @@
 
 - 📫 How to reach me **atahanka@gmail.com**
 
-- 📄 Know about my experiences [https://www.linkedin.com/in/atahan-karagoz](https://www.linkedin.com/in/atahan-karagoz)
+- 📄 Know about my experiences [linkedin](https://www.linkedin.com/in/atahan-karagoz)
 
 - ⚡ Fun fact **I love making creative presentations to live audiences**
 
