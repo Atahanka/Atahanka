@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Atahan Karagöz</h1>
-<h3 align="center">A passionate software engineer/AI researcher in Switzerland</h3>
+<h3 align="center">A passionate Software Engineer/AI Researcher in Switzerland</h3>
 
 - 🌱 I’m currently specializing in **Machine Intelligence at the University of Basel**
 
