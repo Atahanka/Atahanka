@@ -17,7 +17,7 @@
 
 - 📄 Know about my experiences [**LinkedIn**](https://www.linkedin.com/in/atahan-karagoz)
 
-- 📝 I write articles on [**LinkedIn**](https://www.linkedin.com/in/atahan-karagoz)
+- 📝 My published papers [**Academia**](https://independent.academia.edu/AtahanKaragoz)
 
 - ⚡ Fun fact about me **I love making creative presentations to live audiences**
 
