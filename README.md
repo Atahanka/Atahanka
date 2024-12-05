@@ -9,7 +9,7 @@
 
 - 🤝 I’m looking for help with [**PictoSort**](https://github.com/Atahanka/PictoSort)
 
-- 👨‍💻 All of my projects are available at [**GitHub**](https://github.com/Atahanka)
+- 👨‍💻 All of my projects are available at [**GitHub**](https://github.com/Atahanka) (contact me for access)
 
 - 💬 Ask me about **AI, ML and Energy**
 
