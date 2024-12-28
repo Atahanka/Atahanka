@@ -11,7 +11,7 @@
 
 - 👨‍💻 All of my projects are available at [**GitHub**](https://github.com/Atahanka) (contact me for access)
 
-- 💬 Ask me about **AI, ML, CS and Energy**
+- 💬 Ask me about **AI, ML, CS** and **Energy**
 
 - 📫 How to reach me [**email**](atahanka@gmail.com)
 
