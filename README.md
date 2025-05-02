@@ -15,6 +15,8 @@
     <a href="https://linkedin.com/in/atahan-karagoz">
       <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
     </a>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; max-width: 500px;">
     <a href="https://independent.academia.edu/AtahanKaragoz">
       <img src="https://img.shields.io/badge/Academia-414141?style=for-the-badge&logo=academia&logoColor=white"/>
     </a>
