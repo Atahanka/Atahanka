@@ -121,14 +121,14 @@ em {
 /* Thinner horizontal rule */
 hr.thin {
   border: none;
-  border-top: 0.2px solid #e5e7eb;
+  border-top: 0.2px solid #dfe4ea;
   margin: 3rem 0;
 }
 
 /* Bolder horizontal rule */
 hr.bold {
   border: none;
-  border-top: 0.2px solid #e5e7eb;
+  border-top: 0.2px solid #d0d9e0;
   margin: 6rem 0;
 }
 
