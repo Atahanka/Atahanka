@@ -4,10 +4,6 @@
 <h3 align="center">Software Engineer & AI Researcher · Switzerland</h3>
 
 <p align="center">
-  I build intelligent systems, engineer robust software, and explore learning algorithms that solve meaningful problems.
-</p>
-
-<p align="center">
   <a href="mailto:atahanka@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"/></a>
   <a href="https://linkedin.com/in/atahan-karagoz"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
   <a href="https://independent.academia.edu/AtahanKaragoz"><img src="https://img.shields.io/badge/Academia-414141?style=for-the-badge&logo=academia&logoColor=white"/></a>
@@ -31,24 +27,24 @@
 ### 🧪 Featured Projects
 
 #### 🔬 OmicsCL  
-**Multi-omics cancer subtype discovery with unsupervised contrastive learning**  
-Survival-aware embedding, transformer-based fusion, and clustering for real-world genomics.
+**Unsupervised contrastive learning for cancer subtype discovery and survival stratification**  
+Integrates gene expression, DNA methylation, and miRNA profiles using contrastive learning and a survival-aware loss function for effective clustering and patient stratification.
 
-#### ⚖ ADAFAIREA Framework  
-**Adaptive Fairness & Explainability in Real-Time Algorithms**  
-Modular AI pipeline designed for responsible decision-making and dynamic interpretability.
+#### ⚖ ADAFAIREA  
+**Adaptive fairness and explainability for real-time AI models**  
+A modular framework that integrates fairness and explainability into AI systems, ensuring ethical, interpretable, and adaptable machine learning models.
 
 #### 🛡 X-Ray Scatter Protection System  
-**Swift-based application for real-time scatter reduction in medical imaging**  
+**Swift-based application for real-time scatter prediction in medical imaging**  
 Leverages LiDAR, CoreML, and 3D spatial computation to assist radiological safety.
 
 #### 🖼 PictoSort  
-**On-device photo organization with semantic search**  
-AI-driven photo sorting with privacy-first, CoreML-powered classification — fast, intuitive, offline.
+**AI-powered photo organization**  
+Uses machine learning to automatically sort and categorize images based on visual content.
 
-#### 📚 SOSM_Theory  
-**Theoretical exploration of Student-Optimal Stable Matching**  
-Algorithmic modeling, simulation, and complexity profiling of stable matching theory.
+#### 📚 SOSM  
+**Self-Organizing Survival Manifolds for unsupervised discovery of prognostic structures in biological systems**  
+A theory where survival dynamics emerge from geodesic flows on latent biological manifolds, connecting survival, thermodynamic efficiency, and optimal transport for label-free prognosis.
 
 #### 🔢 Prime Sum Approximation  
 **Improved logarithmic estimate for the sum of primes**  
@@ -60,13 +56,15 @@ An analytical approach to approximate ∑p ≤ n p using enhanced integral bound
 
 ### 🧠 Domains of Interest
 
-- **Artificial Intelligence** · Self-supervised learning, contrastive objectives  
-- **Machine Learning** · Model design, survival analysis, unsupervised representation learning  
-- **Software Engineering** · Swift, C++, and Python systems for mobile, backend, and research  
-- **Genomics & Biomedical ML** · Omics analysis, risk modeling, patient stratification  
-- **Mathematical Modeling** · Approximation theory, optimization, and algorithmic structure
+- **Artificial Intelligence** · Intelligent systems, learning algorithms, decision processes  
+- **Machine Learning** · Pattern recognition, data-driven modeling, predictive analytics  
+- **Software Engineering** · Scalable applications, system design, code architecture  
+- **Genomics & Biomedical ML** · Biological signals, health data analysis, computational biology  
+- **Computational Mathematics** · Optimization, quantitative reasoning, theoretical modeling  
 
 ---
+
+<!-- 🛠 TOOLS -->
 
 ### 🛠 Tools & Technologies
 
