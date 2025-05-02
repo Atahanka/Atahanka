@@ -8,19 +8,17 @@
 </p>
 
 <div align="center">
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; max-width: 500px;">
-    <a href="mailto:atahanka@gmail.com">
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; max-width: 440px;">
+    <a href="mailto:atahanka@gmail.com" style="flex: 0 0 200px; margin: 5px;">
       <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
     </a>
-    <a href="https://linkedin.com/in/atahan-karagoz">
+    <a href="https://linkedin.com/in/atahan-karagoz" style="flex: 0 0 200px; margin: 5px;">
       <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
     </a>
-  </div>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; max-width: 500px;">
-    <a href="https://independent.academia.edu/AtahanKaragoz">
+    <a href="https://independent.academia.edu/AtahanKaragoz" style="flex: 0 0 200px; margin: 5px;">
       <img src="https://img.shields.io/badge/Academia-414141?style=for-the-badge&logo=academia&logoColor=white"/>
     </a>
-    <a href="https://github.com/Atahanka">
+    <a href="https://github.com/Atahanka" style="flex: 0 0 200px; margin: 5px;">
       <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
     </a>
   </div>
