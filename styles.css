@@ -74,6 +74,14 @@ ul.left {
   text-align: left;
 }
 
+em.center {
+  text-align: center;
+}
+
+em.left {
+  text-align: left;
+}
+
 p, ul {
   margin: 1rem 0;
 }
