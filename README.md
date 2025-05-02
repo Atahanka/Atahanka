@@ -26,27 +26,27 @@
 
 ### 🧪 Featured Projects
 
-#### 🔬 OmicsCL  
+#### 🔬 **OmicsCL**  
 **Unsupervised contrastive learning for cancer subtype discovery and survival stratification**  
 Integrates gene expression, DNA methylation, and miRNA profiles using contrastive learning and a survival-aware loss function for effective clustering and patient stratification.
 
-#### ⚖ ADAFAIREA  
+#### ⚖ **ADAFAIREA**  
 **Adaptive fairness and explainability for real-time AI models**  
 A modular framework that integrates fairness and explainability into AI systems, ensuring ethical, interpretable, and adaptable machine learning models.
 
-#### 🛡 X-Ray Scatter Protection System  
+#### 🛡 **X-Ray Scatter Protection System**  
 **Swift-based application for real-time scatter prediction in medical imaging**  
 Leverages LiDAR, CoreML, and 3D spatial computation to assist radiological safety.
 
-#### 🖼 PictoSort  
+#### 🖼 **PictoSort**  
 **AI-powered photo organization**  
 Uses machine learning to automatically sort and categorize images based on visual content.
 
-#### 📚 SOSM  
+#### 📚 **SOSM**  
 **Self-Organizing Survival Manifolds for unsupervised discovery of prognostic structures in biological systems**  
 A theory where survival dynamics emerge from geodesic flows on latent biological manifolds, connecting survival, thermodynamic efficiency, and optimal transport for label-free prognosis.
 
-#### 🔢 Prime Sum Approximation  
+#### 🔢 **Prime Sum Approximation**  
 **Improved logarithmic estimate for the sum of primes**  
 An analytical approach to approximate ∑p ≤ n p using enhanced integral bounds.
 
