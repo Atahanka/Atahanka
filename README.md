@@ -1,7 +1,11 @@
 <!-- 🌐 PROFILE HEADER -->
 
 <h1 align="center">Atahan Karagöz</h1>
-<h3 align="center">Software Engineer & AI Researcher · Switzerland</h3>
+<h3 align="center">Software Engineer · AI Researcher</h3>
+
+<p align="center">
+  🏔️ Based in <strong>Switzerland</strong>
+</p>
 
 <p align="center">
   <a href="mailto:atahanka@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"/></a>
@@ -15,16 +19,16 @@
 
 ### 🚀 What I Do
 
-- Design and develop **scalable, intelligent systems**
+- Design and develop **scalable**, **intelligent systems**
 - Research in **machine learning**, **artificial intelligence**, and **bioinformatics**
-- Engineer real-world tools with clean architecture and performance-aware design
-- Combine theory with implementation across software, math, and data-driven science
+- Engineer real-world tools with **clean architecture** and **performance-aware design**
+- Combine **theory** with implementation across **software**, **math**, and **data-driven science**
 
 ---
 
 <!-- 🧪 PROJECTS -->
 
-### 🧪 Featured Projects
+### 🧩 Featured Projects
 
 #### 🔬 **OmicsCL**  
 **Unsupervised contrastive learning for cancer subtype discovery and survival stratification**  
@@ -54,7 +58,7 @@ An analytical approach to approximate ∑p ≤ n p using enhanced integral bound
 
 <!-- 🧠 DOMAINS -->
 
-### 🧠 Domains of Interest
+### 🎯 Domains of Interest
 
 - **Artificial Intelligence** · Intelligent systems, learning algorithms, decision processes  
 - **Machine Learning** · Pattern recognition, data-driven modeling, predictive analytics  
@@ -201,7 +205,7 @@ An analytical approach to approximate ∑p ≤ n p using enhanced integral bound
 
 <!-- 📈 STATS -->
 
-### 📊 GitHub Analytics
+### 📈 GitHub Analytics
 
 <p align="center">
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=Atahanka&custom_title=Commit%20Activity%20Graph&bg_color=fdfdfd&color=0f172a&line=1e3a8a&point=38bdf8&area=true&area_color=bae6fd&hide_border=true" width="95%" alt="Custom GitHub Commit Graph"/>
