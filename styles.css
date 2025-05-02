@@ -16,19 +16,19 @@ h1 {
 
 h2 {
   font-size: 1.5rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
 h3 {
   font-size: 1.25rem;
-  margin-top: 1.5rem;
+  margin-top: 0.75rem;
   margin-bottom: 0.75rem;
 }
 
 h4 {
   font-size: 1rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -118,24 +118,17 @@ em {
   margin: 0 auto;
 }
 
-/* Horizontal rules */
-hr {
-  margin: 1rem 0;
-  border: none;
-  border-top: 1px solid #e5e7eb;
-}
-
 /* Thinner horizontal rule */
 hr.thin {
   border: none;
-  border-top: 1px solid #e5e7eb;
+  border-top: 0.5px solid #e5e7eb;
   margin: 3rem 0;
 }
 
 /* Bolder horizontal rule */
 hr.bold {
   border: none;
-  border-top: 3px solid #e5e7eb;
+  border-top: 1px solid #e5e7eb;
   margin: 5rem 0;
 }
 
