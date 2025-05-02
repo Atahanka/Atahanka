@@ -17,20 +17,20 @@ h1 {
 
 h2 {
   font-size: 1.5rem;
-  margin-top: 2.5rem;
-  margin-bottom: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 h3 {
   font-size: 1.25rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
 }
 
 h4 {
   font-size: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 h1.center, h2.center, h3.center, h4.center,
@@ -44,11 +44,11 @@ p.left, ul.left, em.left {
 }
 
 p, ul {
-  margin: 1rem 0;
+  margin: 0.5rem 0 1rem 0;
 }
 
 ul {
-  padding-left: 1.2rem;
+  padding-left: 1.25rem;
 }
 
 a {
@@ -63,7 +63,7 @@ a:hover {
 em {
   display: block;
   color: #6b7280;
-  margin-top: 3rem;
+  margin: 0.25rem 0 1.5rem 0;
   font-style: italic;
 }
 
@@ -76,14 +76,14 @@ em {
 /* Horizontal rules */
 hr.thin {
   border: none;
-  border-top: 0.2px solid #dfe4ea;
-  margin: 2.5rem 0;
+  border-top: 1px solid #e0e0e0;
+  margin: 2rem 0;
 }
 
 hr.bold {
   border: none;
-  border-top: 1.5px solid #d0d9e0;
-  margin: 4.5rem 0;
+  border-top: 2px solid #cfd8dc;
+  margin: 3.5rem 0;
 }
 
 /* Badges */
