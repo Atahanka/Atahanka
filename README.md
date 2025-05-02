@@ -4,7 +4,7 @@
 <h3 align="center">Software Engineer · AI Researcher</h3>
 
 <p align="center">
-  🏔️ Based in <strong>Switzerland</strong>
+  Based in Switzerland
 </p>
 
 <p align="center">
