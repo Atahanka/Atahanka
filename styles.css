@@ -120,15 +120,23 @@ em {
 
 /* Horizontal rules */
 hr {
-  margin: 5rem 0;
+  margin: 1rem 0;
   border: none;
   border-top: 1px solid #e5e7eb;
 }
 
-hr2 {
-  margin: 3rem 0;
+/* Thinner horizontal rule */
+hr.thin {
   border: none;
   border-top: 1px solid #e5e7eb;
+  margin: 3rem 0;
+}
+
+/* Bolder horizontal rule */
+hr.bold {
+  border: none;
+  border-top: 3px solid #e5e7eb;
+  margin: 5rem 0;
 }
 
 /* Badges */
