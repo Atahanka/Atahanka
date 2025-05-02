@@ -11,80 +11,35 @@ body {
 h1 {
   text-align: center;
   font-size: 2rem;
-  margin-bottom: 0.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 h2 {
   font-size: 1.5rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
 }
 
 h3 {
   font-size: 1.25rem;
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 h4 {
   font-size: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   margin-bottom: 0.5rem;
 }
 
-h1.center {
+h1.center, h2.center, h3.center, h4.center,
+p.center, ul.center, em.center {
   text-align: center;
 }
 
-h1.left {
-  text-align: left;
-}
-
-h2.center {
-  text-align: center;
-}
-
-h2.left {
-  text-align: left;
-}
-
-h3.center {
-  text-align: center;
-}
-
-h3.left {
-  text-align: left;
-}
-
-h4.center {
-  text-align: center;
-}
-
-h4.left {
-  text-align: left;
-}
-
-p.center {
-  text-align: center;
-}
-
-p.left {
-  text-align: left;
-}
-
-ul.center {
-  text-align: center;
-}
-
-ul.left {
-  text-align: left;
-}
-
-em.center {
-  text-align: center;
-}
-
-em.left {
+h1.left, h2.left, h3.left, h4.left,
+p.left, ul.left, em.left {
   text-align: left;
 }
 
@@ -118,18 +73,17 @@ em {
   margin: 0 auto;
 }
 
-/* Thinner horizontal rule */
+/* Horizontal rules */
 hr.thin {
   border: none;
   border-top: 0.2px solid #dfe4ea;
-  margin: 3rem 0;
+  margin: 2.5rem 0;
 }
 
-/* Bolder horizontal rule */
 hr.bold {
   border: none;
-  border-top: 0.2px solid #d0d9e0;
-  margin: 6rem 0;
+  border-top: 1.5px solid #d0d9e0;
+  margin: 4.5rem 0;
 }
 
 /* Badges */
@@ -149,7 +103,7 @@ hr.bold {
 img.graph {
   width: 95%;
   display: block;
-  margin: auto;
+  margin: 2rem auto;
 }
 
 /* Tools and technologies */
@@ -168,5 +122,5 @@ img.graph {
 
 /* Section spacing */
 section {
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
 }
