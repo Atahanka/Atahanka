@@ -206,7 +206,7 @@ An analytical approach to approximate ∑p ≤ n p using enhanced integral bound
 ### 📊 GitHub Analytics
 
 <p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Atahanka&theme=vue" alt="📋 Summary Card" width="95%"/>
+  <img src="https://Atahanka.github.io/custom-summary-card.html" width="95%">
 </p>
 
 ---
