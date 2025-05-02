@@ -70,71 +70,32 @@ An analytical approach to approximate ∑p ≤ n p using enhanced integral bound
 
 ### 🛠 Tools & Technologies
 
-#### 💻 Languages & Compilers
+💻 Programming Languages
+Proficient in multiple programming languages utilized across various projects:
 
-<p align="left">
-  <a href="https://www.python.org" target="_blank"><img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/></a>
-  <a href="https://developer.apple.com/swift/" target="_blank"><img src="https://img.shields.io/badge/Swift-FA7343?style=for-the-badge&logo=swift&logoColor=white"/></a>
-  <a href="https://www.cprogramming.com/" target="_blank"><img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white"/></a>
-  <a href="https://www.w3schools.com/cpp/" target="_blank"><img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white"/></a>
-  <a href="https://www.scala-lang.org" target="_blank"><img src="https://img.shields.io/badge/Scala-DC322F?style=for-the-badge&logo=scala&logoColor=white"/></a>
-  <a href="https://www.java.com" target="_blank"><img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white"/></a>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/></a>
-  <a href="https://www.w3schools.com/cs/" target="_blank"><img src="https://img.shields.io/badge/CSharp-239120?style=for-the-badge&logo=csharp&logoColor=white"/></a>
-</p>
+<p align="left"> <a href="https://www.python.org" target="_blank"><img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/></a> <a href="https://developer.apple.com/swift/" target="_blank"><img src="https://img.shields.io/badge/Swift-FA7343?style=for-the-badge&logo=swift&logoColor=white"/></a> <a href="https://isocpp.org/" target="_blank"><img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white"/></a> <a href="https://www.scala-lang.org/" target="_blank"><img src="https://img.shields.io/badge/Scala-DC322F?style=for-the-badge&logo=scala&logoColor=white"/></a> <a href="https://www.java.com/" target="_blank"><img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white"/></a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/></a> <a href="https://www.w3.org/Style/CSS/Overview.en.html" target="_blank"><img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/></a> <a href="https://www.w3.org/html/" target="_blank"><img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/></a> <a href="https://www.rust-lang.org/" target="_blank"><img src="https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white"/></a> <a href="https://www.haskell.org/" target="_blank"><img src="https://img.shields.io/badge/Haskell-5D4F85?style=for-the-badge&logo=haskell&logoColor=white"/></a> </p>
+🤖 Artificial Intelligence & Machine Learning
+Experienced in developing and deploying AI/ML models across various domains:
 
-#### 🧠 AI / ML / Genomics
+<p align="left"> <a href="https://pytorch.org/" target="_blank"><img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"/></a> <a href="https://www.tensorflow.org/" target="_blank"><img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"/></a> <a href="https://scikit-learn.org/" target="_blank"><img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white"/></a> <a href="https://keras.io/" target="_blank"><img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white"/></a> <a href="https://www.jax.org/" target="_blank"><img src="https://img.shields.io/badge/JAX-000000?style=for-the-badge&logo=google&logoColor=white"/></a> <a href="https://www.microsoft.com/en-us/research/project/microsoft-cognitive-toolkit/" target="_blank"><img src="https://img.shields.io/badge/CNTK-0078D7?style=for-the-badge&logo=microsoft&logoColor=white"/></a> <a href="https://www.mlflow.org/" target="_blank"><img src="https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white"/></a> <a href="https://www.huggingface.co/" target="_blank"><img src="https://img.shields.io/badge/HuggingFace-FF6F00?style=for-the-badge&logo=huggingface&logoColor=white"/></a> </p>
+📊 Data Science & Analytics
+Proficient in data manipulation, analysis, and visualization tools:
 
-<p align="left">
-  <a href="https://pytorch.org/" target="_blank"><img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"/></a>
-  <a href="https://www.tensorflow.org/" target="_blank"><img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"/></a>
-  <a href="https://scikit-learn.org/" target="_blank"><img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white"/></a>
-  <a href="https://pandas.pydata.org/" target="_blank"><img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white"/></a>
-  <a href="https://numpy.org/" target="_blank"><img src="https://img.shields.io/badge/Numpy-013243?style=for-the-badge&logo=numpy&logoColor=white"/></a>
-  <a href="https://umap-learn.readthedocs.io/en/latest/" target="_blank"><img src="https://img.shields.io/badge/UMAP-black?style=for-the-badge&logo=python&logoColor=white"/></a>
-  <a href="https://seaborn.pydata.org/" target="_blank"><img src="https://img.shields.io/badge/Seaborn-3776AB?style=for-the-badge&logo=python&logoColor=white"/></a>
-  <a href="https://lifelines.readthedocs.io/en/latest/" target="_blank"><img src="https://img.shields.io/badge/Lifelines-323330?style=for-the-badge&logo=python&logoColor=white"/></a>
-</p>
+<p align="left"> <a href="https://pandas.pydata.org/" target="_blank"><img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white"/></a> <a href="https://numpy.org/" target="_blank"><img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white"/></a> <a href="https://matplotlib.org/" target="_blank"><img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white"/></a> <a href="https://seaborn.pydata.org/" target="_blank"><img src="https://img.shields.io/badge/Seaborn-3776AB?style=for-the-badge&logo=python&logoColor=white"/></a> <a href="https://plotly.com/" target="_blank"><img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white"/></a> <a href="https://www.tableau.com/" target="_blank"><img src="https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white"/></a> <a href="https://powerbi.microsoft.com/" target="_blank"><img src="https://img.shields.io/badge/PowerBI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black"/></a> </p>
+🧬 Bioinformatics & Genomics
+Applied computational tools in genomics and bioinformatics research:
+ResearchGate
++4
+Frontiers
++4
+Semantic Scholar
++4
 
-#### 📱 Mobile, Embedded & On-Device ML
+<p align="left"> <a href="https://biopython.org/" target="_blank"><img src="https://img.shields.io/badge/Biopython-3776AB?style=for-the-badge&logo=python&logoColor=white"/></a> <a href="https://bioconductor.org/" target="_blank"><img src="https://img.shields.io/badge/Bioconductor-3C9CD7?style=for-the-badge&logo=r&logoColor=white"/></a> <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi" target="_blank"><img src="https://img.shields.io/badge/BLAST-006400?style=for-the-badge&logo=ncbi&logoColor=white"/></a> <a href="https://www.ebi.ac.uk/Tools/msa/clustalo/" target="_blank"><img src="https://img.shields.io/badge/Clustal Omega-8A2BE2?style=for-the-badge&logo=ebi&logoColor=white"/></a> <a href="https://www.galaxyproject.org/" target="_blank"><img src="https://img.shields.io/badge/Galaxy-000000?style=for-the-badge&logo=galaxy&logoColor=white"/></a> <a href="https://www.openms.de/" target="_blank"><img src="https://img.shields.io/badge/OpenMS-FF4500?style=for-the-badge&logo=openms&logoColor=white"/></a> <a href="https://www.copasi.org/" target="_blank"><img src="https://img.shields.io/badge/COPASI-1E90FF?style=for-the-badge&logo=copasi&logoColor=white"/></a> </p>
+🧰 Development Tools & Platforms
+Utilized various tools for software development and project management:
 
-<p align="left">
-  <a href="https://developer.apple.com/xcode/" target="_blank"><img src="https://img.shields.io/badge/Xcode-1575F9?style=for-the-badge&logo=xcode&logoColor=white"/></a>
-  <a href="https://developer.apple.com/machine-learning/" target="_blank"><img src="https://img.shields.io/badge/CoreML-black?style=for-the-badge&logo=apple&logoColor=white"/></a>
-  <a href="https://reactnative.dev/" target="_blank"><img src="https://img.shields.io/badge/ReactNative-61DAFB?style=for-the-badge&logo=react&logoColor=black"/></a>
-  <a href="https://developer.android.com" target="_blank"><img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white"/></a>
-  <a href="https://www.arduino.cc/" target="_blank"><img src="https://img.shields.io/badge/Arduino-00979D?style=for-the-badge&logo=arduino&logoColor=white"/></a>
-</p>
-
-#### ⚙️ Systems, DevOps & Performance
-
-<p align="left">
-  <a href="https://www.linux.org/" target="_blank"><img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"/></a>
-  <a href="https://www.docker.com/" target="_blank"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/></a>
-  <a href="https://git-scm.com/" target="_blank"><img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/></a>
-  <a href="https://www.jenkins.io/" target="_blank"><img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"/></a>
-  <a href="https://www.openmp.org/" target="_blank"><img src="https://img.shields.io/badge/OpenMP-0033A0?style=for-the-badge&logo=c&logoColor=white"/></a>
-</p>
-
-#### 🌐 Web & UI
-
-<p align="left">
-  <a href="https://reactjs.org/" target="_blank"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/></a>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank"><img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/></a>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"><img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/></a>
-  <a href="https://d3js.org/" target="_blank"><img src="https://img.shields.io/badge/D3.js-F9A03C?style=for-the-badge&logo=d3.js&logoColor=white"/></a>
-  <a href="https://webpack.js.org/" target="_blank"><img src="https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=webpack&logoColor=black"/></a>
-</p>
-
-#### 🧪 Visualization & Design
-
-<p align="left">
-  <a href="https://www.figma.com/" target="_blank"><img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"/></a>
-  <a href="https://www.adobe.com/in/products/illustrator.html" target="_blank"><img src="https://img.shields.io/badge/Illustrator-FF9A00?style=for-the-badge&logo=adobe-illustrator&logoColor=white"/></a>
-  <a href="https://www.photoshop.com/" target="_blank"><img src="https://img.shields.io/badge/Photoshop-31A8FF?style=for-the-badge&logo=adobe-photoshop&logoColor=white"/></a>
-  <a href="https://www.blender.org/" target="_blank"><img src="https://img.shields.io/badge/Blender-F5792A?style=for-the-badge&logo=blender&logoColor=white"/></a>
-</p>
-
+<p align="left"> <a href="https://git-scm.com/" target="_blank"><img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/></a> <a href="https://github.com/" target="_blank"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/></a> <a href="https://www.docker.com/" target="_blank"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/></a> <a href="https://www.jenkins.io/" target="_blank"><img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white"/></a> <a href="https://code.visualstudio.com/" target="_blank"><img src="https://img.shields.io/badge/VS Code-007ACC?style=for-the ::contentReference[oaicite:25]{index=25}
 ---
 
 <!-- 📈 STATS -->
