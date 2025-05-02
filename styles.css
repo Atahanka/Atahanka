@@ -107,7 +107,6 @@ a:hover {
 
 em {
   display: block;
-  text-align: center;
   color: #6b7280;
   margin-top: 3rem;
   font-style: italic;
@@ -121,6 +120,12 @@ em {
 
 /* Horizontal rules */
 hr {
+  margin: 5rem 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+hr2 {
   margin: 3rem 0;
   border: none;
   border-top: 1px solid #e5e7eb;
