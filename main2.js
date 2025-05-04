@@ -4,136 +4,132 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 console.log("Three.js loaded");
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xd7f1db);
+scene.background = new THREE.Color(0xe0f7f5);
 
-const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
-camera.position.set(100, 100, 100);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+camera.position.set(80, 60, 80);
 camera.lookAt(0, 0, 0);
 
-const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("cityCanvas"), antialias: true });
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('cityCanvas'), antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
+controls.maxPolarAngle = Math.PI / 2.1; // prevent camera from going below ground
 
-// Lights
+// LIGHTING
 scene.add(new THREE.AmbientLight(0xffffff, 0.8));
 const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
-dirLight.position.set(100, 100, 100);
+dirLight.position.set(50, 100, 50);
 scene.add(dirLight);
 
-// Ground
+// EXTENDED GROUND
 const ground = new THREE.Mesh(
-  new THREE.PlaneGeometry(300, 300),
-  new THREE.MeshLambertMaterial({ color: 0xd7f1db })
+  new THREE.PlaneGeometry(1000, 1000),
+  new THREE.MeshLambertMaterial({ color: 0xc5ebdf })
 );
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
 
-// Trees
-function createTree(x, z) {
+// ROAD MATERIAL (curved paths simulated with positioned planes)
+const roadMat = new THREE.MeshLambertMaterial({ color: 0xaaaaaa });
+function createRoad(x, z, w, h, r = 0) {
+  const road = new THREE.Mesh(new THREE.PlaneGeometry(w, h), roadMat);
+  road.rotation.x = -Math.PI / 2;
+  road.rotation.z = r;
+  road.position.set(x, 0.05, z);
+  scene.add(road);
+}
+createRoad(0, 0, 60, 6);         // main road horizontal
+createRoad(20, 30, 6, 60);       // main road vertical
+createRoad(-30, 20, 40, 6, 0.4); // curved road
+
+// BUILDING CREATION
+const fontLoader = new THREE.FontLoader();
+let fontReady = false;
+let font;
+fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', f => {
+  font = f;
+  fontReady = true;
+});
+
+// label + building
+function createBuilding(label, x, z, h, color, section) {
+  const mat = new THREE.MeshStandardMaterial({ color });
+  const mesh = new THREE.Mesh(new THREE.BoxGeometry(5, h, 5), mat);
+  mesh.position.set(x, h / 2, z);
+  mesh.userData = { label, section };
+  scene.add(mesh);
+
+  if (fontReady) {
+    const textGeo = new THREE.TextGeometry(label, {
+      font,
+      size: 1,
+      height: 0.1
+    });
+    const textMat = new THREE.MeshStandardMaterial({ color: 0x333333 });
+    const text = new THREE.Mesh(textGeo, textMat);
+    text.position.set(x - 2.5, h + 1, z - 2);
+    scene.add(text);
+  }
+  buildings.push(mesh);
+}
+
+// SECTION GROUPS
+const buildings = [];
+createBuilding("LinkedIn", 10, 0, 10, 0x2978b5, "Contact");
+createBuilding("Email", 17, -5, 8, 0xd7263d, "Contact");
+createBuilding("GitHub", 25, 4, 12, 0x000000, "Contact");
+
+createBuilding("Academia", -20, -15, 10, 0x414141, "Profile");
+createBuilding("Resume", -25, -20, 9, 0x777777, "Profile");
+
+createBuilding("Projects HQ", -10, 20, 14, 0x46b1c9, "TechnoPark");
+createBuilding("AI Lab", -18, 24, 12, 0x2a9d8f, "TechnoPark");
+createBuilding("Bio Lab", -5, 28, 10, 0xf4a261, "TechnoPark");
+
+// TREES
+function plantTree(x, z) {
   const trunk = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.3, 0.3, 1),
+    new THREE.CylinderGeometry(0.2, 0.2, 1),
     new THREE.MeshStandardMaterial({ color: 0x8b5a2b })
   );
   trunk.position.set(x, 0.5, z);
-  const crown = new THREE.Mesh(
-    new THREE.SphereGeometry(0.8, 16, 16),
-    new THREE.MeshStandardMaterial({ color: 0x9bdd7d })
+  const leaves = new THREE.Mesh(
+    new THREE.SphereGeometry(0.6, 12, 12),
+    new THREE.MeshStandardMaterial({ color: 0x55aa55 })
   );
-  crown.position.set(x, 1.5, z);
-  scene.add(trunk);
-  scene.add(crown);
+  leaves.position.set(x, 1.3, z);
+  scene.add(trunk, leaves);
 }
 for (let i = 0; i < 50; i++) {
-  const x = Math.random() * 250 - 125;
-  const z = Math.random() * 250 - 125;
-  createTree(x, z);
+  const x = Math.random() * 100 - 50;
+  const z = Math.random() * 100 - 50;
+  plantTree(x, z);
 }
 
-// Roads
-const roadMaterial = new THREE.MeshLambertMaterial({ color: 0x999999 });
-for (let i = -50; i <= 50; i += 20) {
-  const road = new THREE.Mesh(new THREE.BoxGeometry(100, 0.1, 4), roadMaterial);
-  road.position.set(0, 0.05, i);
-  scene.add(road);
-
-  const vertical = new THREE.Mesh(new THREE.BoxGeometry(4, 0.1, 100), roadMaterial);
-  vertical.position.set(i, 0.05, 0);
-  scene.add(vertical);
-}
-
-// Sidewalks
-const walkMaterial = new THREE.MeshLambertMaterial({ color: 0xbbbbbb });
-for (let i = -50; i <= 50; i += 20) {
-  const hwalk = new THREE.Mesh(new THREE.BoxGeometry(100, 0.1, 2), walkMaterial);
-  hwalk.position.set(0, 0.1, i + 3);
-  scene.add(hwalk);
-
-  const vwalk = new THREE.Mesh(new THREE.BoxGeometry(2, 0.1, 100), walkMaterial);
-  vwalk.position.set(i + 3, 0.1, 0);
-  scene.add(vwalk);
-}
-
-// Buildings
-function createBuilding(x, z, h) {
-  const bldg = new THREE.Mesh(
-    new THREE.BoxGeometry(5, h, 5),
-    new THREE.MeshStandardMaterial({ color: 0xcccccc })
-  );
-  bldg.position.set(x, h / 2, z);
-  scene.add(bldg);
-}
-for (let i = -40; i <= 40; i += 20) {
-  for (let j = -40; j <= 40; j += 20) {
-    const h = Math.random() * 10 + 5;
-    createBuilding(i, j, h);
+// POPUP INTERACTION
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+window.addEventListener("click", event => {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(buildings);
+  if (hits.length > 0) {
+    const { label, section } = hits[0].object.userData;
+    const card = document.getElementById("infoCard");
+    document.getElementById("buildingTitle").innerText = label;
+    document.getElementById("buildingDesc").innerText = `This is the ${label} building in the ${section} section.`;
+    card.classList.remove("hidden");
   }
-}
+});
 
-// Cars
-const carGeometry = new THREE.BoxGeometry(2, 1, 1);
-const carMaterial = new THREE.MeshLambertMaterial({ color: 0x3333ff });
-const cars = [];
-for (let i = 0; i < 6; i++) {
-  const car = new THREE.Mesh(carGeometry, carMaterial);
-  car.position.set(-50 + i * 20, 0.6, -50);
-  scene.add(car);
-  cars.push({ mesh: car, speed: 0.3 + Math.random() * 0.3, axis: 'x', forward: true });
-}
-
-// People
-const humanGeometry = new THREE.CylinderGeometry(0.3, 0.3, 1.4, 8);
-const humanMaterial = new THREE.MeshLambertMaterial({ color: 0xff6666 });
-const people = [];
-for (let i = 0; i < 10; i++) {
-  const person = new THREE.Mesh(humanGeometry, humanMaterial);
-  person.position.set(-40 + i * 8, 0.7, 40);
-  scene.add(person);
-  people.push({ mesh: person, speed: 0.1 + Math.random() * 0.1, axis: 'z', forward: true });
-}
-
+// ANIMATION LOOP
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
-
-  // Move cars
-  cars.forEach(obj => {
-    if (obj.axis === 'x') {
-      obj.mesh.position.x += obj.forward ? obj.speed : -obj.speed;
-      if (Math.abs(obj.mesh.position.x) > 50) obj.forward = !obj.forward;
-    }
-  });
-
-  // Move people
-  people.forEach(obj => {
-    if (obj.axis === 'z') {
-      obj.mesh.position.z += obj.forward ? obj.speed : -obj.speed;
-      if (Math.abs(obj.mesh.position.z) > 40) obj.forward = !obj.forward;
-    }
-  });
-
   renderer.render(scene, camera);
 }
 animate();

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Atahan Karagöz</title>
-  <link rel="stylesheet" href="style1.css">
+  <title>Atahan City</title>
+  <link rel="stylesheet" href="style1.css" />
   <script type="importmap">
     {
       "imports": {
@@ -16,6 +16,11 @@
 </head>
 <body>
   <canvas id="cityCanvas"></canvas>
+  <div id="infoCard" class="info-card hidden">
+    <h2 id="buildingTitle">Title</h2>
+    <p id="buildingDesc">Description</p>
+    <button onclick="document.getElementById('infoCard').classList.add('hidden')">Close</button>
+  </div>
   <script type="module" src="main2.js"></script>
 </body>
 </html>
