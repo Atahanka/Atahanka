@@ -1,0 +1,140 @@
+/* Base styles */
+:root {
+    --font-main: 'Space Grotesk', sans-serif;
+    --color-bg: #f9f9f9;
+    --color-text: #111;
+    --color-accent: #6366f1;
+    --color-muted: #777;
+    --transition: 0.4s ease;
+  }
+  
+  [data-theme="dark"] {
+    --color-bg: #111;
+    --color-text: #f1f1f1;
+    --color-accent: #8b5cf6;
+    --color-muted: #999;
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-main);
+    scroll-behavior: smooth;
+    transition: background-color var(--transition), color var(--transition);
+  }
+  
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+  }
+  
+  h1, h2, h3, h4 {
+    font-weight: 700;
+    color: var(--color-text);
+  }
+  
+  p, li {
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+  
+  .hero .intro {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .hero .intro h1 {
+    font-size: 3rem;
+  }
+  
+  .hero .intro h2 {
+    font-size: 1.5rem;
+    color: var(--color-muted);
+  }
+  
+  .hero .links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .btn {
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    background: var(--color-accent);
+    color: #fff;
+    transition: transform var(--transition);
+  }
+  
+  .btn:hover {
+    transform: scale(1.05);
+  }
+  
+  .section {
+    margin-bottom: 4rem;
+  }
+  
+  .section h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+  }
+  
+  .section ul {
+    list-style: disc inside;
+    padding-left: 0;
+  }
+  
+  .projects .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  
+  .card {
+    background: rgba(255,255,255,0.1);
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    border: 1px solid var(--color-accent);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  }
+  
+  blockquote {
+    text-align: center;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--color-muted);
+  }
+  
+  /* Theme Toggle Button */
+  #theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    background: var(--color-accent);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+  
+  #theme-toggle:hover {
+    background: #4f46e5;
+  }
+  
