@@ -71,3 +71,26 @@ canvas#noise-canvas {
   text-decoration: none;
   font-weight: bold;
 }
+
+.bottom-nav {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.5rem 1.5rem;
+  border-radius: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  backdrop-filter: blur(10px);
+}
+.bottom-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+.bottom-nav a:hover {
+  color: var(--color-accent);
+}
