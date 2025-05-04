@@ -1,80 +1,89 @@
 /* style-enhancements.css */
 
-/* Soft section backgrounds for visual distinction */
-section:nth-of-type(even) {
-  background-color: #fafafa;
+/* Section box style */
+section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
   padding: 2rem;
-  border-radius: 10px;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
-/* Smooth transitions for interactivity */
-details summary {
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-details[open] summary {
-  background-color: #f0f4f8;
-  border-radius: 8px;
-}
-
-/* Headings with slight color emphasis */
+/* Header enhancements */
 h2, h3 {
   color: #0f172a;
-  border-left: 4px solid #60a5fa;
+  border-left: 4px solid #3b82f6;
   padding-left: 0.75rem;
+  margin-bottom: 0.75rem;
+  background-color: #f8fafc;
+  border-radius: 4px;
 }
 
-/* Enhanced link appearance */
+/* Divider styling */
+hr {
+  border: none;
+  border-top: 1px solid #d1d5db;
+  margin: 3rem 0;
+}
+
+/* Emphasized quote block */
+em {
+  background: #f1f5f9;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #60a5fa;
+  display: block;
+  margin: 2rem auto;
+  border-radius: 6px;
+  font-style: italic;
+  color: #334155;
+}
+
+/* Refined badges container */
+.badge-group {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Clean badges (no border on hover) */
+.badge-group a img {
+  transition: transform 0.2s ease-in-out;
+}
+
+.badge-group a:hover img {
+  transform: scale(1.05);
+}
+
+/* Link styling — no underline, modern look */
 a {
-  color: #1d4ed8;
-  transition: color 0.2s ease;
+  color: #2563eb;
+  font-weight: 500;
+  text-decoration: none;
 }
 
 a:hover {
-  color: #1e40af;
+  color: #1d4ed8;
   text-decoration: underline;
 }
 
-/* Divider line enhancements */
-hr {
-  border: none;
-  border-top: 1px dashed #d1d5db;
-  margin: 2.5rem 0;
-}
-
-/* Callout quotes */
-em {
-  background-color: #f1f5f9;
-  padding: 0.75rem 1rem;
-  border-left: 4px solid #93c5fd;
-  border-radius: 6px;
-  font-style: italic;
-}
-
-/* Button-like summary */
-summary h3 {
-  display: inline-block;
-  margin: 0;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
-}
-
-/* Light hover highlight */
-summary:hover h3 {
-  background-color: #e0f2fe;
-}
-
-/* Badge group tweaks */
-.badge-group {
-  background-color: #f9fafb;
+/* Graph */
+img.graph {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
-  padding: 0.5rem;
-  margin-top: 1rem;
 }
 
-/* Responsive badge layout */
-@media (max-width: 600px) {
+/* Responsive improvements */
+@media (max-width: 700px) {
+  section {
+    padding: 1.5rem;
+  }
+  h2, h3 {
+    font-size: 1rem;
+  }
   .badge-group {
     flex-direction: column;
     align-items: center;
