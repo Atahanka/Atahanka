@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { FontLoader } from './jsm/loaders/FontLoader.js';
 
 console.log("Three.js loaded");
 
@@ -49,7 +50,7 @@ createRoad(-30, 20, 40, 6, 0.4); // curved road
 const fontLoader = new THREE.FontLoader();
 let fontReady = false;
 let font;
-fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', f => {
+fontLoader.load('./helvetiker_regular.typeface.json', f => {
   font = f;
   fontReady = true;
 });
