@@ -47,7 +47,7 @@ createRoad(20, 30, 6, 60);       // main road vertical
 createRoad(-30, 20, 40, 6, 0.4); // curved road
 
 // BUILDING CREATION
-const fontLoader = new THREE.FontLoader();
+const fontLoader = new FontLoader();
 let fontReady = false;
 let font;
 fontLoader.load('./helvetiker_regular.typeface.json', f => {
