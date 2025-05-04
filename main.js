@@ -3,22 +3,36 @@ import { OrbitControls } from 'https://cdn.skypack.dev/three/examples/jsm/contro
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x0d1117);
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-camera.position.set(20, 20, 20);
 
+// Camera setup
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+camera.position.set(30, 30, 30);
+camera.lookAt(0, 0, 0);
+
+// Renderer
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('cityCanvas'), antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
 
+// Controls
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+// Lighting
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
 scene.add(ambientLight);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(20, 50, 10);
+scene.add(directionalLight);
 
-const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-dirLight.position.set(30, 50, 10);
-scene.add(dirLight);
+// Ground plane
+const planeGeometry = new THREE.PlaneGeometry(100, 100);
+const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x222222, side: THREE.DoubleSide });
+const ground = new THREE.Mesh(planeGeometry, planeMaterial);
+ground.rotation.x = -Math.PI / 2;
+scene.add(ground);
 
+// Helper to create buildings
 function createBuilding(x, z, height, color, label) {
   const geometry = new THREE.BoxGeometry(6, height, 6);
   const material = new THREE.MeshStandardMaterial({ color });
@@ -29,27 +43,29 @@ function createBuilding(x, z, height, color, label) {
   return mesh;
 }
 
-// Buildings representing sections
+// Section buildings
 createBuilding(0, 0, 16, 0xff5f5f, 'Projects');
-createBuilding(12, -12, 10, 0x5fff5f, 'Domains');
-createBuilding(-12, -12, 10, 0x5f5fff, 'Tools');
-createBuilding(-12, 12, 8, 0xffbf00, 'Stats');
-createBuilding(12, 12, 6, 0x00bfff, 'Contact');
+createBuilding(15, -15, 10, 0x5fff5f, 'Domains');
+createBuilding(-15, -15, 10, 0x5f5fff, 'Tools');
+createBuilding(-15, 15, 8, 0xffbf00, 'Stats');
+createBuilding(15, 15, 6, 0x00bfff, 'Contact');
 
-// Projects floors
+// Project floors inside Projects building
 const projects = [
   'OmicsCL', 'ADAFAIREA', 'X-Ray Scatter Protection System',
   'PictoSort', 'SOSM', 'Prime Sum Approximation'
 ];
 projects.forEach((name, i) => {
-  const geometry = new THREE.BoxGeometry(6, 0.6, 6);
-  const material = new THREE.MeshStandardMaterial({ color: 0xff9900 });
-  const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.set(0, 0.6 + i * 0.7, 10);
-  mesh.userData.project = name;
-  scene.add(mesh);
+  const floor = new THREE.Mesh(
+    new THREE.BoxGeometry(5.5, 0.5, 5.5),
+    new THREE.MeshStandardMaterial({ color: 0xff9900 })
+  );
+  floor.position.set(0, 1 + i * 1.1, 10);  // Offset building
+  floor.userData.project = name;
+  scene.add(floor);
 });
 
+// Raycasting
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
@@ -69,6 +85,7 @@ window.addEventListener('click', (event) => {
   }
 });
 
+// Animate
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
