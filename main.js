@@ -1,5 +1,5 @@
 import * as THREE from './three.module.js';
-import { OrbitControls } from './OrbitControls.js';
+import { OrbitControls } from './jsm/controls/OrbitControls.js';
 
 console.log("Three.js loaded");
 
