@@ -1,91 +1,58 @@
-/* style-enhancements.css */
+/* === STUNNING VISUAL ENHANCEMENTS === */
 
-/* Section box style */
+/* Section Headings */
+h2, h3 {
+  position: relative;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid #e0e7ff;
+  color: #1e3a8a;
+}
+
+/* Section Card Styling */
 section {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
   border-radius: 12px;
   padding: 2rem;
   margin-bottom: 3rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
-/* Header enhancements */
-h2, h3 {
-  color: #0f172a;
-  border-left: 4px solid #3b82f6;
-  padding-left: 0.75rem;
-  margin-bottom: 0.75rem;
-  background-color: #f8fafc;
-  border-radius: 4px;
+/* Link and badge glow */
+a img:hover {
+  filter: drop-shadow(0 0 4px #60a5fa);
+  transform: scale(1.03);
+  transition: all 0.3s ease;
 }
 
-/* Divider styling */
-hr {
-  border: none;
-  border-top: 1px solid #d1d5db;
-  margin: 3rem 0;
+/* Subtle gradient top banner */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 180px;
+  width: 100%;
+  background: linear-gradient(to right, #dbeafe, #f0f9ff);
+  z-index: -1;
 }
 
-/* Emphasized quote block */
+/* Footer text */
 em {
-  background: #f1f5f9;
-  padding: 0.75rem 1rem;
-  border-left: 4px solid #60a5fa;
-  display: block;
-  margin: 2rem auto;
-  border-radius: 6px;
-  font-style: italic;
-  color: #334155;
+  font-size: 0.9rem;
+  color: #4b5563;
+  border-top: 1px dashed #d1d5db;
+  padding-top: 1rem;
+  margin-top: 4rem;
+  text-align: center;
 }
 
-/* Refined badges container */
-.badge-group {
-  background: #f9fafb;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-top: 1.5rem;
-  gap: 12px;
-  justify-content: center;
-}
-
-/* Clean badges (no border on hover) */
-.badge-group a img {
-  transition: transform 0.2s ease-in-out;
-}
-
-.badge-group a:hover img {
-  transform: scale(1.05);
-}
-
-/* Link styling — no underline, modern look */
+/* Smooth hover effect for all links */
 a {
-  color: #2563eb;
-  font-weight: 500;
-  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
 a:hover {
   color: #1d4ed8;
-  text-decoration: underline;
-}
-
-/* Graph */
-img.graph {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
-}
-
-/* Responsive improvements */
-@media (max-width: 700px) {
-  section {
-    padding: 1.5rem;
-  }
-  h2, h3 {
-    font-size: 1rem;
-  }
-  .badge-group {
-    flex-direction: column;
-    align-items: center;
-  }
+  transform: translateY(-1px);
 }
