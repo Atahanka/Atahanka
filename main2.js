@@ -4,99 +4,136 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 console.log("Three.js loaded");
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x0f172a, 0.015);
-scene.background = new THREE.Color(0x0f172a);
+scene.background = new THREE.Color(0xd7f1db);
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-camera.position.set(50, 50, 50);
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+camera.position.set(100, 100, 100);
 camera.lookAt(0, 0, 0);
 
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("cityCanvas"), antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.outputEncoding = THREE.sRGBEncoding;
 
-// Controls
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
-// Lighting
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
-scene.add(ambientLight);
-const dirLight = new THREE.DirectionalLight(0x00ccff, 1);
-dirLight.position.set(30, 100, 30);
+// Lights
+scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
+dirLight.position.set(100, 100, 100);
 scene.add(dirLight);
 
-// Grid ground
-const gridSize = 200;
-const gridDivisions = 100;
-const grid = new THREE.GridHelper(gridSize, gridDivisions, 0x00ffff, 0x003344);
-grid.material.opacity = 0.2;
-grid.material.transparent = true;
-scene.add(grid);
+// Ground
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(300, 300),
+  new THREE.MeshLambertMaterial({ color: 0xd7f1db })
+);
+ground.rotation.x = -Math.PI / 2;
+scene.add(ground);
 
-// Stylized building
-function createBuilding(x, z, height, color, label) {
-  const geometry = new THREE.BoxGeometry(6, height, 6);
-  const material = new THREE.MeshStandardMaterial({
-    color: color,
-    metalness: 0.8,
-    roughness: 0.2,
-    emissive: color,
-    emissiveIntensity: 0.2
-  });
-  const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.set(x, height / 2, z);
-  mesh.userData.label = label;
-  scene.add(mesh);
-  return mesh;
+// Trees
+function createTree(x, z) {
+  const trunk = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.3, 0.3, 1),
+    new THREE.MeshStandardMaterial({ color: 0x8b5a2b })
+  );
+  trunk.position.set(x, 0.5, z);
+  const crown = new THREE.Mesh(
+    new THREE.SphereGeometry(0.8, 16, 16),
+    new THREE.MeshStandardMaterial({ color: 0x9bdd7d })
+  );
+  crown.position.set(x, 1.5, z);
+  scene.add(trunk);
+  scene.add(crown);
+}
+for (let i = 0; i < 50; i++) {
+  const x = Math.random() * 250 - 125;
+  const z = Math.random() * 250 - 125;
+  createTree(x, z);
 }
 
-// Section buildings
-createBuilding(0, 0, 20, 0x0099ff, 'Projects');
-createBuilding(20, 0, 14, 0x66ff66, 'Domains');
-createBuilding(-20, 0, 18, 0xff6666, 'Tools');
-createBuilding(0, 20, 12, 0xffcc00, 'Stats');
-createBuilding(0, -20, 10, 0xcc66ff, 'Contact');
+// Roads
+const roadMaterial = new THREE.MeshLambertMaterial({ color: 0x999999 });
+for (let i = -50; i <= 50; i += 20) {
+  const road = new THREE.Mesh(new THREE.BoxGeometry(100, 0.1, 4), roadMaterial);
+  road.position.set(0, 0.05, i);
+  scene.add(road);
 
-// Project floors (glowing stack)
-const projects = ['OmicsCL', 'ADAFAIREA', 'X-Ray Scatter Protection System', 'PictoSort', 'SOSM', 'Prime Sum Approximation'];
-projects.forEach((name, i) => {
-  const floor = new THREE.Mesh(
-    new THREE.BoxGeometry(5.5, 0.6, 5.5),
-    new THREE.MeshStandardMaterial({
-      color: 0xff9900,
-      emissive: 0xff6600,
-      emissiveIntensity: 0.4,
-      metalness: 0.6,
-      roughness: 0.3
-    })
+  const vertical = new THREE.Mesh(new THREE.BoxGeometry(4, 0.1, 100), roadMaterial);
+  vertical.position.set(i, 0.05, 0);
+  scene.add(vertical);
+}
+
+// Sidewalks
+const walkMaterial = new THREE.MeshLambertMaterial({ color: 0xbbbbbb });
+for (let i = -50; i <= 50; i += 20) {
+  const hwalk = new THREE.Mesh(new THREE.BoxGeometry(100, 0.1, 2), walkMaterial);
+  hwalk.position.set(0, 0.1, i + 3);
+  scene.add(hwalk);
+
+  const vwalk = new THREE.Mesh(new THREE.BoxGeometry(2, 0.1, 100), walkMaterial);
+  vwalk.position.set(i + 3, 0.1, 0);
+  scene.add(vwalk);
+}
+
+// Buildings
+function createBuilding(x, z, h) {
+  const bldg = new THREE.Mesh(
+    new THREE.BoxGeometry(5, h, 5),
+    new THREE.MeshStandardMaterial({ color: 0xcccccc })
   );
-  floor.position.set(30, 1 + i * 0.8, 0);
-  floor.userData.project = name;
-  scene.add(floor);
-});
-
-// Interaction
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-
-window.addEventListener("click", (event) => {
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-  raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects(scene.children);
-  if (intersects.length > 0) {
-    const obj = intersects[0].object;
-    const data = obj.userData;
-    if (data.label) alert("Section: " + data.label);
-    else if (data.project) alert("Project: " + data.project);
+  bldg.position.set(x, h / 2, z);
+  scene.add(bldg);
+}
+for (let i = -40; i <= 40; i += 20) {
+  for (let j = -40; j <= 40; j += 20) {
+    const h = Math.random() * 10 + 5;
+    createBuilding(i, j, h);
   }
-});
+}
+
+// Cars
+const carGeometry = new THREE.BoxGeometry(2, 1, 1);
+const carMaterial = new THREE.MeshLambertMaterial({ color: 0x3333ff });
+const cars = [];
+for (let i = 0; i < 6; i++) {
+  const car = new THREE.Mesh(carGeometry, carMaterial);
+  car.position.set(-50 + i * 20, 0.6, -50);
+  scene.add(car);
+  cars.push({ mesh: car, speed: 0.3 + Math.random() * 0.3, axis: 'x', forward: true });
+}
+
+// People
+const humanGeometry = new THREE.CylinderGeometry(0.3, 0.3, 1.4, 8);
+const humanMaterial = new THREE.MeshLambertMaterial({ color: 0xff6666 });
+const people = [];
+for (let i = 0; i < 10; i++) {
+  const person = new THREE.Mesh(humanGeometry, humanMaterial);
+  person.position.set(-40 + i * 8, 0.7, 40);
+  scene.add(person);
+  people.push({ mesh: person, speed: 0.1 + Math.random() * 0.1, axis: 'z', forward: true });
+}
 
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
+
+  // Move cars
+  cars.forEach(obj => {
+    if (obj.axis === 'x') {
+      obj.mesh.position.x += obj.forward ? obj.speed : -obj.speed;
+      if (Math.abs(obj.mesh.position.x) > 50) obj.forward = !obj.forward;
+    }
+  });
+
+  // Move people
+  people.forEach(obj => {
+    if (obj.axis === 'z') {
+      obj.mesh.position.z += obj.forward ? obj.speed : -obj.speed;
+      if (Math.abs(obj.mesh.position.z) > 40) obj.forward = !obj.forward;
+    }
+  });
+
   renderer.render(scene, camera);
 }
 animate();
