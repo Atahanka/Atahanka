@@ -1,0 +1,42 @@
+/* Soft background boxes for section headers */
+section h3 {
+  background-color: #f3f4f6;
+  padding: 0.4rem 0.8rem;
+  border-left: 4px solid #0f172a;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+/* Light border under each section */
+section {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 2rem;
+}
+
+/* Add hover effect to badges */
+.badge-group a img:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Section anchor hover style */
+h3:hover::after {
+  content: " 🔗";
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+/* Code styling for inline backticks */
+code {
+  background-color: #f3f4f6;
+  padding: 0.2em 0.4em;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 90%;
+  border-radius: 4px;
+}
+
+/* Improve summary toggle area */
+summary:hover {
+  cursor: pointer;
+  background-color: #f9fafb;
+}
