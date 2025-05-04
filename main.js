@@ -1,7 +1,7 @@
-import * as THREE from 'https://unpkg.com/three@0.152.2/build/three.module.js';
-import { OrbitControls } from 'https://unpkg.com/three@0.152.2/examples/jsm/controls/OrbitControls.js';
+import * as THREE from 'https://threejs.org/build/three.module.js';
+import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js';
 
-console.log("Three.js loaded");
+console.log("Three.js + OrbitControls loaded");
 
 // Scene and Camera
 const scene = new THREE.Scene();
@@ -39,7 +39,7 @@ const ground = new THREE.Mesh(groundGeometry, groundMaterial);
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
 
-// DEBUG CUBE - to ensure something is always visible
+// DEBUG CUBE
 const debugBox = new THREE.Mesh(
   new THREE.BoxGeometry(5, 5, 5),
   new THREE.MeshStandardMaterial({ color: 0xffff00 })
@@ -75,7 +75,7 @@ projects.forEach((name, i) => {
     new THREE.BoxGeometry(5.5, 0.5, 5.5),
     new THREE.MeshStandardMaterial({ color: 0xff9900 })
   );
-  floor.position.set(0, 1 + i * 1.1, -5);  // offset so it's visible
+  floor.position.set(0, 1 + i * 1.1, -5);
   floor.userData.project = name;
   scene.add(floor);
 });
