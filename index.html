@@ -3,24 +3,271 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Atahan City</title>
-  <link rel="stylesheet" href="style1.css" />
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "./three.module.js",
-        "three/examples/jsm/controls/OrbitControls.js": "./jsm/controls/OrbitControls.js"
-      }
-    }
-  </script>
+  <title>Atahan Karagöz</title>
+  <link rel="stylesheet" href="/Atahanka/assets/css/style.css?v=3a47fbad7e74e5d53a95efa78dab9dd9872928e6">
 </head>
 <body>
-  <canvas id="cityCanvas"></canvas>
-  <div id="infoCard" class="info-card hidden">
-    <h2 id="buildingTitle">Title</h2>
-    <p id="buildingDesc">Description</p>
-    <button onclick="document.getElementById('infoCard').classList.add('hidden')">Close</button>
+    <div class="container-lg px-3 my-5 markdown-body">
+
+      <!-- 🌐 PROFILE HEADER -->
+
+<h1 align="center">Atahan Karagöz</h1>
+<h3 align="center">Software Engineer · AI Researcher</h3>
+
+<p align="center">
+  Based in Switzerland
+</p>
+
+<div align="center">
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; max-width: 600px;">
+    <div style="display: flex; gap: 10px;">
+      <a href="mailto:atahanka@gmail.com">
+        <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
+      </a>
+      <a href="https://linkedin.com/in/atahan-karagoz">
+        <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
+      </a>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <a href="https://independent.academia.edu/AtahanKaragoz">
+        <img src="https://img.shields.io/badge/Academia-414141?style=for-the-badge&logo=academia&logoColor=white"/>
+      </a>
+      <a href="https://github.com/Atahanka">
+        <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
+      </a>
+    </div>
   </div>
-  <script type="module" src="main2.js"></script>
-</body>
+</div>
+
+<hr />
+
+<!-- 🚀 OVERVIEW -->
+<details open onclick="setTimeout(() => { this.querySelector('em').style.display = this.open ? 'none' : 'inline'; }, 0);">
+  <summary style="list-style: none;">
+    <span style="font-size: 1.25rem; font-weight: 600;">🚀 What I Do</span>
+    <em style="font-size: 0.85rem; color: #6b7280; display: none;">(Click to expand)</em>
+  </summary>
+  
+  <ul>
+    <li>Design and develop <strong>scalable</strong>, <strong>intelligent systems</strong></li>
+    <li>Research in <strong>machine learning</strong>, <strong>artificial intelligence</strong>, and <strong>bioinformatics</strong></li>
+    <li>Engineer real-world tools with <strong>clean architecture</strong> and <strong>performance-aware design</strong></li>
+    <li>Combine <strong>theory</strong> with implementation across <strong>software</strong>, <strong>math</strong>, and <strong>data-driven science</strong></li>
+  </ul>
+</details>
+<hr />
+
+<!-- 🧪 PROJECTS -->
+<details onclick="setTimeout(() => { this.querySelector('em').style.display = this.open ? 'none' : 'inline'; }, 0);">
+  <summary style="list-style: none;">
+    <span style="font-size: 1.25rem; font-weight: 600;">🧩 Featured Projects</span>
+    <em style="font-size: 0.85rem; color: #6b7280;">(Click to expand)</em>
+  </summary>
+  
+  <h4 id="-omicscl">🔬 <strong>OmicsCL</strong></h4>
+  <p><strong>Unsupervised contrastive learning for cancer subtype discovery and survival stratification</strong><br />
+  Integrates gene expression, DNA methylation, and miRNA profiles using contrastive learning and a survival-aware loss function for effective clustering and patient stratification.</p>
+  
+  <h4 id="-adafairea">⚖ <strong>ADAFAIREA</strong></h4>
+  <p><strong>Adaptive fairness and explainability for real-time AI models</strong><br />
+  A modular framework that integrates fairness and explainability into AI systems, ensuring ethical, interpretable, and adaptable machine learning models.</p>
+  
+  <h4 id="-x-ray-scatter-protection-system">🛡 <strong>X-Ray Scatter Protection System</strong></h4>
+  <p><strong>Swift-based application for real-time scatter prediction in medical imaging</strong><br />
+  Leverages LiDAR, CoreML, and 3D spatial computation to assist radiological safety.</p>
+  
+  <h4 id="-pictosort">🖼 <strong>PictoSort</strong></h4>
+  <p><strong>AI-powered photo organization</strong><br />
+  Uses machine learning to automatically sort and categorize images based on visual content.</p>
+  
+  <h4 id="-sosm">📚 <strong>SOSM</strong></h4>
+  <p><strong>Self-Organizing Survival Manifolds for unsupervised discovery of prognostic structures in biological systems</strong><br />
+  A theory where survival dynamics emerge from geodesic flows on latent biological manifolds, connecting survival, thermodynamic efficiency, and optimal transport for label-free prognosis.</p>
+  
+  <h4 id="-prime-sum-approximation">🔢 <strong>Prime Sum Approximation</strong></h4>
+  <p><strong>Improved logarithmic estimate for the sum of primes</strong><br />
+  An analytical approach to approximate ∑p ≤ n p using enhanced integral bounds.</p>
+</details>
+<hr />
+
+<!-- 🧠 DOMAINS -->
+<details onclick="setTimeout(() => { this.querySelector('em').style.display = this.open ? 'none' : 'inline'; }, 0);">
+  <summary style="list-style: none;">
+    <span style="font-size: 1.25rem; font-weight: 600;">🎯 Domains of Interest</span>
+    <em style="font-size: 0.85rem; color: #6b7280;">(Click to expand)</em>
+  </summary>
+  
+  <ul>
+    <li><strong>Artificial Intelligence</strong> · Intelligent systems, learning algorithms, decision processes</li>
+    <li><strong>Machine Learning</strong> · Pattern recognition, data-driven modeling, predictive analytics</li>
+    <li><strong>Software Engineering</strong> · Scalable applications, system design, code architecture</li>
+    <li><strong>Genomics &amp; Biomedical ML</strong> · Biological signals, health data analysis, computational biology</li>
+    <li><strong>Computational Mathematics</strong> · Optimization, quantitative reasoning, theoretical modeling</li>
+  </ul>
+</details>
+<hr />
+
+<!-- 🛠 TOOLS -->
+<details onclick="setTimeout(() => { this.querySelector('em').style.display = this.open ? 'none' : 'inline'; }, 0);">
+  <summary style="list-style: none;">
+    <span style="font-size: 1.25rem; font-weight: 600;">🛠 Tools &amp; Technologies</span>
+    <em style="font-size: 0.85rem; color: #6b7280;">(Click to expand)</em>
+  </summary>
+  
+  <h4 id="-programming-languages">💻 Programming Languages</h4>
+  <p align="left">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&amp;logo=python&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&amp;logo=java&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&amp;logo=c&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&amp;logo=c%2B%2B&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&amp;logo=c-sharp&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Kotlin-0095D5?style=for-the-badge&amp;logo=kotlin&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Swift-FA7343?style=for-the-badge&amp;logo=swift&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&amp;logo=gnu-bash&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&amp;logo=html5&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&amp;logo=css3&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/XML-000000?style=for-the-badge&amp;logo=xml&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/JSON-000000?style=for-the-badge&amp;logo=json&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&amp;logo=php&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&amp;logo=postgresql&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&amp;logo=graphql&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/MATLAB-0076A8?style=for-the-badge&amp;logo=mathworks&amp;logoColor=white" />
+  </p>
+  
+  <h4 id="-ai--machine-learning">🧠 AI &amp; Machine Learning</h4>
+  <p align="left">
+    <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&amp;logo=tensorflow&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&amp;logo=pytorch&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&amp;logo=keras&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&amp;logo=scikit-learn&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/NLTK-323330?style=for-the-badge&amp;logo=python&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/spaCy-09A3D5?style=for-the-badge&amp;logo=spacy&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/CoreML-000000?style=for-the-badge&amp;logo=apple&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/t--SNE-FF5733?style=for-the-badge&amp;logo=chartdotjs&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/UMAP-000000?style=for-the-badge&amp;logo=python&amp;logoColor=white" />
+  </p>
+  
+  <h4 id="-data--visualization">📊 Data &amp; Visualization</h4>
+  <p align="left">
+    <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&amp;logo=pandas&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&amp;logo=numpy&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&amp;logo=matplotlib&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Seaborn-3776AB?style=for-the-badge&amp;logo=python&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&amp;logo=plotly&amp;logoColor=white" />
+  </p>
+  
+  <h4 id="-databases">🗃 Databases</h4>
+  <p align="left">
+    <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&amp;logo=mysql&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&amp;logo=postgresql&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&amp;logo=mongodb&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&amp;logo=sqlite&amp;logoColor=white" />
+  </p>
+  
+  <h4 id="️-tools--devops">⚙️ Tools &amp; DevOps</h4>
+  <p align="left">
+    <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&amp;logo=git&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&amp;logo=github&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&amp;logo=jenkins&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&amp;logo=docker&amp;logoColor=white" />
+  </p>
+  
+  <h4 id="-ides--editors">🧰 IDEs &amp; Editors</h4>
+  <p align="left">
+    <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&amp;logo=visual-studio-code&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/PyCharm-000000?style=for-the-badge&amp;logo=pycharm&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/IntelliJ-000000?style=for-the-badge&amp;logo=intellij-idea&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&amp;logo=eclipse-ide&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/NetBeans-1B6AC6?style=for-the-badge&amp;logo=apache-netbeans-ide&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Xcode-1575F9?style=for-the-badge&amp;logo=xcode&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/AndroidStudio-3DDC84?style=for-the-badge&amp;logo=android-studio&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/SQLDeveloper-F80000?style=for-the-badge&amp;logo=oracle&amp;logoColor=white" />
+  </p>
+  
+  <h4 id="-web--backend">🌐 Web &amp; Backend</h4>
+  <p align="left">
+    <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&amp;logo=react&amp;logoColor=61DAFB" />
+    <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&amp;logo=spring-boot&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/REST-FF6C37?style=for-the-badge&amp;logo=rest&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&amp;logo=graphql&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Apache-CA2139?style=for-the-badge&amp;logo=apache&amp;logoColor=white" />
+  </p>
+  
+  <h4 id="-embedded--hardware">📱 Embedded &amp; Hardware</h4>
+  <p align="left">
+    <img src="https://img.shields.io/badge/Arduino-00979D?style=for-the-badge&amp;logo=arduino&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/RaspberryPi-A22846?style=for-the-badge&amp;logo=raspberry-pi&amp;logoColor=white" />
+  </p>
+  
+  <h4 id="-creative--multimedia">🎮 Creative &amp; Multimedia</h4>
+  <p align="left">
+    <img src="https://img.shields.io/badge/Unity-000000?style=for-the-badge&amp;logo=unity&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/UnrealEngine-313131?style=for-the-badge&amp;logo=unrealengine&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Blender-F5792A?style=for-the-badge&amp;logo=blender&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/AutodeskMaya-00AEEF?style=for-the-badge&amp;logo=autodesk&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/AfterEffects-9999FF?style=for-the-badge&amp;logo=adobe-after-effects&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/PremierePro-9999FF?style=for-the-badge&amp;logo=adobe-premiere-pro&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Photoshop-31A8FF?style=for-the-badge&amp;logo=adobe-photoshop&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Illustrator-FF9A00?style=for-the-badge&amp;logo=adobe-illustrator&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/AdobeXD-FF61F6?style=for-the-badge&amp;logo=adobe-xd&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&amp;logo=figma&amp;logoColor=white" />
+  </p>
+  
+  <h4 id="-testing--qa">✅ Testing &amp; QA</h4>
+  <p align="left">
+    <img src="https://img.shields.io/badge/JUnit-25A162?style=for-the-badge&amp;logo=junit5&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/PyTest-0A9EDC?style=for-the-badge&amp;logo=python&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/SonarQube-4E9BCD?style=for-the-badge&amp;logo=sonarqube&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&amp;logo=eslint&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Pylint-FDC300?style=for-the-badge&amp;logo=python&amp;logoColor=black" />
+    <img src="https://img.shields.io/badge/JMeter-D22128?style=for-the-badge&amp;logo=apache-jmeter&amp;logoColor=white" />
+  </p>
+  
+  <h4 id="️-cloud-docs--collaboration">☁️ Cloud, Docs &amp; Collaboration</h4>
+  <p align="left">
+    <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&amp;logo=amazon-aws&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&amp;logo=microsoft-azure&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/LaTeX-008080?style=for-the-badge&amp;logo=latex&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Wireshark-1679A7?style=for-the-badge&amp;logo=wireshark&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&amp;logo=jira&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Trello-0079BF?style=for-the-badge&amp;logo=trello&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Asana-273347?style=for-the-badge&amp;logo=asana&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&amp;logo=notion&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&amp;logo=slack&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Teams-6264A7?style=for-the-badge&amp;logo=microsoft-teams&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Zoom-2D8CFF?style=for-the-badge&amp;logo=zoom&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&amp;logo=discord&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Word-2B579A?style=for-the-badge&amp;logo=microsoft-word&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Excel-217346?style=for-the-badge&amp;logo=microsoft-excel&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/PowerPoint-B7472A?style=for-the-badge&amp;logo=microsoft-powerpoint&amp;logoColor=white" />
+    <img src="https://img.shields.io/badge/Outlook-0078D4?style=for-the-badge&amp;logo=microsoft-outlook&amp;logoColor=white" />
+  </p>
+</details>
+<hr />
+
+<!-- 📈 STATS -->
+<details onclick="setTimeout(() => { this.querySelector('em').style.display = this.open ? 'none' : 'inline'; }, 0);">
+  <summary style="list-style: none;">
+    <span style="font-size: 1.25rem; font-weight: 600;">📈 GitHub Analytics</span>
+    <em style="font-size: 0.85rem; color: #6b7280;">(Click to expand)</em>
+  </summary>
+  
+  <p align="center">
+    <img src="https://github-readme-activity-graph.vercel.app/graph?username=Atahanka&amp;custom_title=Commit%20Activity%20Graph&amp;bg_color=fdfdfd&amp;color=0f172a&amp;line=1e3a8a&amp;point=38bdf8&amp;area=true&amp;area_color=bae6fd&amp;hide_border=true" width="95%" alt="Custom GitHub Commit Graph" />
+  </p>
+</details>
+<hr />
+
+<!-- 💬 FOOTER -->
+
+<p align="center"><em>
+"Build with intent. Research with clarity. Ship with confidence."
+</em></p>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
 </html>
