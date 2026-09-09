@@ -59,6 +59,21 @@
       document.documentElement.classList.remove('dark');
     }
   </script>
+
+  <style>
+    @keyframes attentionShake {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      15% { transform: translateY(-4px) rotate(-3deg); }
+      30% { transform: translateY(4px) rotate(3deg); }
+      45% { transform: translateY(-3px) rotate(-2deg); }
+      60% { transform: translateY(3px) rotate(2deg); }
+      75% { transform: translateY(-1px) rotate(-1deg); }
+    }
+
+    .animate-attention {
+      animation: attentionShake 1.2s ease-in-out 3; /* Shakes 3 times on load */
+    }
+  </style>
 </head>
 
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 antialiased selection:bg-blue-200 dark:selection:bg-blue-900 relative transition-colors duration-300">
@@ -412,22 +427,24 @@
     <!-- 💬 FLOATING TERMINAL WIDGET -->
     <div class="fixed bottom-6 right-6 z-50 font-mono">
       
-      <!-- Terminal Window (Adapts fully to Light & Dark Mode) -->
+      <!-- Terminal Window -->
       <div id="terminal-window" class="hidden w-[90vw] max-w-md bg-white dark:bg-slate-950 text-slate-800 dark:text-emerald-400 text-sm rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden mb-4 transition-all transform origin-bottom-right">
         
         <!-- Terminal Header -->
         <div class="bg-slate-100 dark:bg-slate-900 px-4 py-3 flex items-center justify-between border-b border-slate-200 dark:border-slate-800">
           <div class="flex items-center gap-2">
-            <div class="w-3 h-3 rounded-full bg-red-500 cursor-pointer" onclick="toggleTerminal()"></div>
-            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            <!-- Red: Close & Clear History -->
+            <div class="w-3 h-3 rounded-full bg-red-500 cursor-pointer hover:opacity-80 transition" onclick="closeAndClearTerminal()" title="Close & Clear"></div>
+            <!-- Yellow: Minimize / Close preserving history -->
+            <div class="w-3 h-3 rounded-full bg-yellow-500 cursor-pointer hover:opacity-80 transition" onclick="toggleTerminal()" title="Minimize"></div>
+            <!-- Green: Maximize / Resize toggle -->
+            <div class="w-3 h-3 rounded-full bg-green-500 cursor-pointer hover:opacity-80 transition" onclick="toggleMaximizeTerminal()" title="Maximize / Restore"></div>
             <span class="text-xs text-slate-500 dark:text-slate-400 ml-2">atahan@switzerland-node ~ bash</span>
           </div>
-          <button onclick="toggleTerminal()" class="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white text-xs">&times; Close</button>
         </div>
 
-        <!-- Terminal Body Window -->
-        <div id="terminal-output" class="p-4 h-56 overflow-y-auto space-y-2 select-text text-xs md:text-sm">
+        <!-- Terminal Body Window (Height changes dynamically on maximize) -->
+        <div id="terminal-output" class="p-4 h-56 transition-all duration-300 overflow-y-auto space-y-2 select-text text-xs md:text-sm">
           <div class="text-slate-500 dark:text-slate-400">Welcome to Atahan's shell. Type <span class="text-slate-900 dark:text-white font-bold">'help'</span> to see commands.</div>
         </div>
 
@@ -443,12 +460,38 @@
 
       <!-- Floating Bubble Button -->
       <button onclick="toggleTerminal()" 
-              class="flex items-center gap-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-white px-4 py-3 rounded-full shadow-lg border border-slate-200 dark:border-slate-800 hover:scale-105 transition-all group">
+              class="flex items-center gap-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-white px-4 py-3 rounded-full shadow-lg border border-slate-200 dark:border-slate-800 hover:scale-105 transition-all group animate-attention">
         <svg class="w-5 h-5 text-blue-600 dark:text-emerald-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
         <span class="text-xs font-semibold tracking-wide">Terminal</span>
       </button>
 
     </div>
+
+    <!-- 🧬 BIO-GENOMIC PARTICLE SYNTHESISER (Interactive Research Visualizer) -->
+    <section class="mb-16">
+      <h3 class="text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2 mb-4 flex items-center justify-between">
+        <span>Multi-Omics Contrastive Cluster Synthesizer</span>
+      </h3>
+      
+      <div class="bg-slate-950 rounded-2xl shadow-xl border border-slate-800 overflow-hidden relative">
+        <!-- Top HUD Bar -->
+        <div class="absolute top-4 left-4 z-10 flex items-center gap-3 font-mono text-xs text-slate-400 bg-slate-900/80 backdrop-blur px-3 py-1.5 rounded-lg border border-slate-800">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>State: <strong class="text-white">Active Contrastive Latent Space</strong></span>
+          <span class="text-slate-600">|</span>
+          <span>Clusters: <strong class="text-sky-400">4 Subtypes</strong></span>
+        </div>
+
+        <!-- Interactive Canvas -->
+        <canvas id="genomicCanvas" class="w-full h-80 md:h-[400px] cursor-crosshair block"></canvas>
+        
+        <!-- Bottom Description Overlay -->
+        <div class="absolute bottom-4 left-4 right-4 z-10 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-slate-400 bg-slate-900/80 backdrop-blur px-4 py-2.5 rounded-xl border border-slate-800 gap-2">
+          <span>Simulating unsupervised multi-omics feature embedding & latent space separation.</span>
+          <span class="text-emerald-400">Click canvas to trigger spatial shockwave.</span>
+        </div>
+      </div>
+    </section>
 
   </main>
 
@@ -471,6 +514,8 @@
     const terminalWindow = document.getElementById('terminal-window');
     const terminalOutput = document.getElementById('terminal-output');
     const terminalInput = document.getElementById('terminal-input');
+    
+    let isMaximized = false;
 
     function toggleTerminal() {
       const isHidden = terminalWindow.classList.contains('hidden');
@@ -482,38 +527,115 @@
       }
     }
 
-    const commands = {
-      help: "Available commands:\n  - whoami     : About Atahan\n  - projects   : List featured research projects\n  - domains    : Areas of interest\n  - contact    : Get direct links & email\n  - clear      : Clear terminal screen",
-      whoami: "Atahan Karagöz — Software Engineer & AI Researcher based in Switzerland.\nFocusing on machine learning, bioinformatics, and scalable systems.",
-      projects: "Featured Works:\n  1. OmicsCL (Unsupervised contrastive learning for cancer subtypes)\n  2. ADAFAIREA (Adaptive fairness & explainability for real-time AI)\n  3. SOSM (Self-Organizing Survival Manifolds)\n  4. X-Ray Scatter Protection (Swift, LiDAR, CoreML)\n  5. PictoSort & Prime Sum Approximation",
-      domains: "Core Domains:\n  - Artificial Intelligence & Machine Learning\n  - Genomics & Biomedical ML\n  - Computational Mathematics\n  - Software Engineering & Systems Architecture",
-      contact: "Get in touch:\n  - Email: atahanka@gmail.com\n  - LinkedIn: linkedin.com/in/atahan-karagoz\n  - GitHub: github.com/Atahanka",
-      "sudo rm -rf /": "Nice try! Permission denied: User is not in the sudoers file."
-    };
+    function closeAndClearTerminal() {
+      terminalWindow.classList.add('hidden');
+      terminalOutput.innerHTML = `<div class="text-slate-500 dark:text-slate-400">Welcome to Atahan's shell. Type <span class="text-slate-900 dark:text-white font-bold">'help'</span> or ask anything!</div>`;
+      if (isMaximized) toggleMaximizeTerminal();
+    }
+
+    function toggleMaximizeTerminal() {
+      isMaximized = !isMaximized;
+      if (isMaximized) {
+        terminalWindow.classList.remove('max-w-md');
+        terminalWindow.classList.add('max-w-3xl', 'w-[95vw]');
+        terminalOutput.classList.remove('h-56');
+        terminalOutput.classList.add('h-[60vh]');
+      } else {
+        terminalWindow.classList.remove('max-w-3xl', 'w-[95vw]');
+        terminalWindow.classList.add('max-w-md');
+        terminalOutput.classList.remove('h-[60vh]');
+        terminalOutput.classList.add('h-56');
+      }
+    }
+
+    function getTerminalResponse(query) {
+      q = query.toLowerCase();
+
+      if (q === 'help') {
+        return "Available commands & shortcuts:\n  - whoami / bio     : About Atahan\n  - projects / work  : Featured research projects\n  - pubs / papers    : Direct links to research profiles\n  - cv / resume      : Career summary & contact instructions\n  - stack / tech     : Core technologies & tools\n  - simulation       : About the interactive canvas on this page\n  - contact / email  : Get direct communication details\n  - swiss / location : Location details\n  - clear            : Clear terminal screen";
+      }
+      
+      if (q.includes('whoami') || q.includes('bio') || q.includes('about') || q.includes('who are you')) {
+        return "Atahan Karagöz — Software Engineer & AI Researcher based in Switzerland.\nFocusing on machine learning, bioinformatics, and scalable intelligent systems.";
+      }
+      
+      if (q.includes('project') || q.includes('work') || q.includes('portfolio') || q.includes('omic') || q.includes('adafairea') || q.includes('sosm')) {
+        return "Featured Works:\n  1. OmicsCL (Unsupervised contrastive learning for cancer subtypes)\n  2. ADAFAIREA (Adaptive fairness & explainability for real-time AI)\n  3. SOSM (Self-Organizing Survival Manifolds)\n  4. X-Ray Scatter Protection (Swift, LiDAR, CoreML)\n  5. PictoSort & Prime Sum Approximation";
+      }
+
+      if (q.includes('simulation') || q.includes('synthesizer') || q.includes('canvas') || q.includes('particles') || q.includes('visual')) {
+        return "Interactive Multi-Omics Synthesizer (Canvas Widget):\n  - What it is: A live particle physics simulation embedded on the page.\n  - What it models: It visually simulates unsupervised multi-omics feature embedding, latent space separation, and contrastive cluster formation—inspired directly by the OmicsCL research framework for cancer subtype discovery[cite: 1].\n  - Try it: Move your cursor across the canvas or click to trigger spatial shockwaves!";
+      }
+      
+      if (q.includes('pub') || q.includes('paper') || q.includes('scholar') || q.includes('orcid') || q.includes('academia') || q.includes('research')) {
+        return "Academic Research Accounts & Publications:\n  - Google Scholar: https://scholar.google.com/citations?user=KfH2hLkAAAAJ\n  - ORCID: https://orcid.org/0009-0008-1791-1966\n  - Academia.edu: https://independent.academia.edu/AtahanKaragoz\n\nTip: Click the badges at the top of the page for direct links!";
+      }
+      
+      if (q.includes('cv') || q.includes('resume') || q.includes('experience') || q.includes('education') || q.includes('background')) {
+        return "Career & Education Summary:\n  - Education: University of Basel (Switzerland) & Wroclaw University of Science and Technology\n  - Focus: AI Research, Bioinformatics, Computational Math, Software Architecture\n  - Contact: Please get in touch via email at atahanka@gmail.com for official inquiries or to request a full PDF resume.";
+      }
+      
+      if (q.includes('stack') || q.includes('tech') || q.includes('language') || q.includes('tool') || q.includes('python') || q.includes('pytorch')) {
+        return "Primary Tech Stack:\n  - AI & ML: PyTorch, TensorFlow, Hugging Face, LangChain, LlamaIndex, vLLM, Scikit-Learn, OpenCV, CoreML\n  - Core Domains: LLMs, RAG, Contrastive Learning, Reinforcement Learning, Bioinformatics, XAI\n  - Languages: Python, Java, Kotlin, C#, C++, SQL, JavaScript, Swift\n  - Frameworks & Architecture: React, Spring, FastAPI, GraphQL, Microservices\n  - DevOps & Cloud: Docker, Git/GitHub, Azure, Jenkins, Linux Bash";
+      }
+      
+      if (q.includes('contact') || q.includes('email') || q.includes('reach') || q.includes('hire') || q.includes('message')) {
+        return "Direct Contact & Professional Links:\n  - Email: atahanka@gmail.com (Primary communication channel)\n  - LinkedIn: https://linkedin.com/in/atahan-karagoz\n  - GitHub: https://github.com/Atahanka";
+      }
+      
+      if (q.includes('swiss') || q.includes('switzerland') || q.includes('basel') || q.includes('location') || q.includes('where')) {
+        return "Location Node: Basel, Switzerland 🇨🇭\nKnown for precision, clean infrastructure, and being a major hub for life sciences and biotech research.";
+      }
+
+      if (q.includes('date') || q.includes('time')) {
+        return `Current System Timestamp: ${new Date().toUTCString()}`;
+      }
+
+      if (q.includes('matrix')) {
+        return "Wake up, Neo...\nThe matrix has you.\nFollow the white rabbit. 🐇";
+      }
+
+      if (q.includes('sudo rm -rf')) {
+        return "Nice try! Permission denied: User is not in the sudoers file.";
+      }
+
+      // Return null so it falls back to the exact command-not-found block
+      return null;
+    }
 
     terminalInput.addEventListener('keydown', function(event) {
       if (event.key === 'Enter') {
-        const inputVal = terminalInput.value.trim().toLowerCase();
-        if (!inputVal) return;
+        const rawInput = terminalInput.value.trim();
+        if (!rawInput) return;
 
         // Print user input
         const userLine = document.createElement('div');
-        userLine.innerHTML = `<span class="text-blue-600 dark:text-emerald-500">$</span> <span class="text-slate-900 dark:text-white">${escapeHtml(terminalInput.value)}</span>`;
+        userLine.innerHTML = `<span class="text-blue-600 dark:text-emerald-500">$</span> <span class="text-slate-900 dark:text-white">${escapeHtml(rawInput)}</span>`;
         terminalOutput.appendChild(userLine);
 
-        // Execute command
+        const inputVal = rawInput.toLowerCase();
+
         if (inputVal === 'clear') {
           terminalOutput.innerHTML = `<div class="text-slate-500 dark:text-slate-400">Terminal cleared. Type <span class="text-slate-900 dark:text-white font-bold">'help'</span> for commands.</div>`;
-        } else if (commands[inputVal]) {
+        } else if (inputVal.startsWith('echo ')) {
+          const echoText = rawInput.substring(5);
           const responseLine = document.createElement('div');
           responseLine.className = "text-slate-700 dark:text-slate-300 whitespace-pre-line pl-4 border-l-2 border-blue-500/30 dark:border-emerald-500/30 my-2";
-          responseLine.textContent = commands[inputVal];
+          responseLine.textContent = echoText;
           terminalOutput.appendChild(responseLine);
         } else {
-          const errorLine = document.createElement('div');
-          errorLine.className = "text-red-500 dark:text-red-400";
-          errorLine.textContent = `zsh: command not found: ${inputVal}. Type 'help' for commands.`;
-          terminalOutput.appendChild(errorLine);
+          const responseText = getTerminalResponse(rawInput);
+          if (responseText) {
+            const responseLine = document.createElement('div');
+            responseLine.className = "text-slate-700 dark:text-slate-300 whitespace-pre-line pl-4 border-l-2 border-blue-500/30 dark:border-emerald-500/30 my-2";
+            responseLine.textContent = responseText;
+            terminalOutput.appendChild(responseLine);
+          } else {
+            const errorLine = document.createElement('div');
+            errorLine.className = "text-red-400";
+            errorLine.textContent = `zsh: command not found: ${inputVal}. Type 'help' for commands.`;
+            terminalOutput.appendChild(errorLine);
+          }
         }
 
         terminalInput.value = '';
@@ -524,6 +646,145 @@
     function escapeHtml(text) {
       return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
+  </script>
+
+  <script>
+    const canvas = document.getElementById('genomicCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    function initCanvas() {
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    }
+    window.addEventListener('resize', initCanvas);
+    initCanvas();
+
+    // Mouse interaction state
+    let mouse = { x: -1000, y: -1000, active: false };
+
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.active = true;
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+      mouse.active = false;
+      mouse.x = -1000;
+      mouse.y = -1000;
+    });
+
+    canvas.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const cx = e.clientX - rect.left;
+      const cy = e.clientY - rect.top;
+      
+      // Create a shockwave impulse pushing nodes away
+      particles.forEach(p => {
+        let dx = p.x - cx;
+        let dy = p.y - cy;
+        let dist = Math.hypot(dx, dy);
+        if (dist < 150) {
+          let angle = Math.atan2(dy, dx);
+          p.vx += Math.cos(angle) * 8;
+          p.vy += Math.sin(angle) * 8;
+        }
+      });
+    });
+
+    // Particle Class representing Multi-Omics Latent Nodes
+    class GenomicNode {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 1.2;
+        this.vy = (Math.random() - 0.5) * 1.2;
+        this.radius = Math.random() * 2.5 + 1.5;
+        // Assign to one of 4 clusters (matching multi-omics subtype stratification concepts)
+        this.cluster = Math.floor(Math.random() * 4);
+        
+        const colors = ['#38bdf8', '#34d399', '#818cf8', '#f43f5e'];
+        this.color = colors[this.cluster];
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Wrap boundaries
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+
+        // Gentle mouse attraction/repulsion field
+        if (mouse.active) {
+          let dx = mouse.x - this.x;
+          let dy = mouse.y - this.y;
+          let dist = Math.hypot(dx, dy);
+          if (dist < 120) {
+            // Slight magnetic pull towards cursor
+            this.vx += (dx / dist) * 0.05;
+            this.vy += (dy / dist) * 0.05;
+          }
+        }
+
+        // Speed dampening to keep motion smooth
+        this.vx *= 0.98;
+        this.vy *= 0.98;
+        if (Math.abs(this.vx) < 0.2) this.vx += (Math.random() - 0.5) * 0.5;
+        if (Math.abs(this.vy) < 0.2) this.vy += (Math.random() - 0.5) * 0.5;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.closePath();
+      }
+    }
+
+    // Generate particle field
+    const particleCount = Math.min(70, Math.floor((window.innerWidth * window.innerHeight) / 9000));
+    let particles = Array.from({ length: particleCount }, () => new GenomicNode());
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw connecting webs (Contrastive feature links)
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          let dx = particles[i].x - particles[j].x;
+          let dy = particles[i].y - particles[j].y;
+          let dist = Math.hypot(dx, dy);
+
+          if (dist < 90) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            // Highlight connections if they belong to the same cluster
+            let alpha = (1 - (dist / 90)) * 0.25;
+            ctx.strokeStyle = particles[i].cluster === particles[j].cluster ? particles[i].color : 'rgba(148, 163, 184, 0.05)';
+            ctx.lineWidth = particles[i].cluster === particles[j].cluster ? 0.8 : 0.3;
+            ctx.stroke();
+            ctx.closePath();
+          }
+        }
+      }
+
+      // Update and draw particles
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+    animate();
   </script>
 </body>
 </html>
