@@ -74,6 +74,15 @@
       animation: attentionShake 1.2s ease-in-out 3; /* Shakes 3 times on load */
     }
   </style>
+
+  <script>
+    // To avoid FOUC (Flash of Unthemed Content)
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
 </head>
 
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 antialiased selection:bg-blue-200 dark:selection:bg-blue-900 relative transition-colors duration-300">
