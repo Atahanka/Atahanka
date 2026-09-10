@@ -251,18 +251,52 @@
         border: 1px solid rgba(255, 255, 255, 0.2);
       }
 
-      /* 4. Physical Item Stretching */
+      /* 4. Responsive Physical Item Stretching */
+      #dock-items {
+        gap: 4px !important; /* Tighter gap on mobile to save space */
+      }
+
       .dock-item {
-        width: 40px; 
-        height: 40px;
+        width: 32px !important;  /* Smaller base size for iPhone */
+        height: 32px !important;
         border-radius: 9999px;
         overflow: hidden;
         display: flex;
         align-items: center;
         transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
       }
+      
+      /* Overrides the Tailwind w-10 h-10 classes on the inner dot container for mobile */
+      .dock-item > div:first-child {
+        width: 32px !important;
+        height: 32px !important;
+      }
+      
       .dock-item:hover, .dock-item.active, .dock-item.force-hover {
-        width: 150px; 
+        width: 105px !important; /* Shorter expansion width on mobile */
+      }
+      
+      .dock-item span {
+        font-size: 11px;
+        padding-left: 2px;
+      }
+
+      /* Desktop Scaling (Tablets and larger) */
+      @media (min-width: 768px) {
+        #dock-items {
+          gap: 8px !important; /* Restores standard gap */
+        }
+        .dock-item, .dock-item > div:first-child {
+          width: 40px !important; 
+          height: 40px !important;
+        }
+        .dock-item:hover, .dock-item.active, .dock-item.force-hover {
+          width: 150px !important; 
+        }
+        .dock-item span {
+          font-size: 12px; /* Tailwind text-xs */
+          padding-left: 8px; /* Tailwind pl-2 */
+        }
       }
 
       /* 5. Dot Lighting */
