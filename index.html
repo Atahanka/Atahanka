@@ -557,21 +557,15 @@
         handlePointerMove(e.clientX, e.clientY);
       }, { passive: true });
 
-      // --- ROBUST WATER DROP & DOCK SLIDE TRACKING ---
-      const dockContainer = document.getElementById('dock') || document.querySelector('nav');
-      let lastPointerX = 0;
-      let lastPointerY = 0;
-      let currentlyHoveredItem = null; // Tracks which icon the finger is currently dragging over
+      /// --- UNIFIED TOUCH & MOUSE TRACKING FOR DOCK REFRACTION & NAVIGATION ---
+      const dockContainer = document.getElementById('liquid-glass-dock') || dock;
+      let currentlyHoveredItem = null;
+      let lastInteractedItem = null;
 
-      function handlePointerMove(e) {
+      function updateDockTracking(clientX, clientY) {
         if (!dockContainer || !glassCanvas) return;
-        
-        const clientX = e.clientX;
-        const clientY = e.clientY;
-        
-        lastPointerX = clientX;
-        lastPointerY = clientY;
-        
+
+        // 1. Update the glass refraction light coordinates
         const rect = dockContainer.getBoundingClientRect();
         const x = ((clientX - rect.left) / rect.width) * 100;
         const y = ((clientY - rect.top) / rect.height) * 100;
@@ -582,73 +576,95 @@
         window.mouseX = clientX;
         window.mouseY = clientY;
 
-        // Force the hover state to transfer during touch drags
+        // 2. Detect which dock item the pointer/finger is hovering or sliding over
         const targetElement = document.elementFromPoint(clientX, clientY);
         if (targetElement) {
-          const dockItem = targetElement.closest('button, a, .dock-icon, [role="tab"]');
-          
+          const dockItem = targetElement.closest('.dock-item');
+
           if (dockItem && dockContainer.contains(dockItem)) {
             if (currentlyHoveredItem !== dockItem) {
-              // Remove hover state from the previous icon
               if (currentlyHoveredItem) {
-                currentlyHoveredItem.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
                 currentlyHoveredItem.classList.remove('force-hover');
               }
-              // Apply hover state to the new icon under the finger
               currentlyHoveredItem = dockItem;
-              currentlyHoveredItem.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+              lastInteractedItem = dockItem;
+              currentHover = dockItem; // Synchronizes with the water-drop render loop
               currentlyHoveredItem.classList.add('force-hover');
             }
           } else if (currentlyHoveredItem) {
-            // Finger slid off the dock items entirely
-            currentlyHoveredItem.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
+            // Off dock items
             currentlyHoveredItem.classList.remove('force-hover');
             currentlyHoveredItem = null;
+            currentHover = null;
           }
         }
       }
 
+      // Handle global mouse move (desktop)
+      window.addEventListener('mousemove', (e) => {
+        updateDockTracking(e.clientX, e.clientY);
+      });
+
+      // Touch/Pointer slide interaction
       if (dockContainer) {
-        dockContainer.style.touchAction = 'none'; // Prevents scrolling while sliding
-        dockContainer.addEventListener('pointermove', handlePointerMove, { passive: true });
-        dockContainer.addEventListener('pointerenter', handlePointerMove, { passive: true });
-        
-        // Cleanup when finger is lifted
-        dockContainer.addEventListener('pointerleave', () => {
-          if (currentlyHoveredItem) {
-              currentlyHoveredItem.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
-              currentlyHoveredItem.classList.remove('force-hover');
-              currentlyHoveredItem = null;
-          }
-        });
+        dockContainer.style.touchAction = 'none'; // Prevent page scroll while sliding on dock
+
+        dockContainer.addEventListener('pointermove', (e) => {
+          updateDockTracking(e.clientX, e.clientY);
+        }, { passive: true });
+
+        dockContainer.addEventListener('pointerenter', (e) => {
+          updateDockTracking(e.clientX, e.clientY);
+        }, { passive: true });
       }
 
-      // Keep global tracking for the light
+      // Global pointer move fallback
       window.addEventListener('pointermove', (e) => {
         if (dockContainer && !dockContainer.contains(e.target)) {
           const rect = dockContainer.getBoundingClientRect();
           if (e.clientY >= rect.top - 100 && e.clientY <= rect.bottom + 100) {
-            handlePointerMove(e);
+            updateDockTracking(e.clientX, e.clientY);
           }
         }
       }, { passive: true });
 
-      // Open the tab when the finger is lifted
-      window.addEventListener('pointerup', (e) => {
-        if (!dockContainer) return;
-        const targetElement = document.elementFromPoint(lastPointerX, lastPointerY);
-        if (targetElement) {
-          const dockItem = targetElement.closest('button, a, .dock-icon, [role="tab"]');
-          if (dockItem && dockContainer.contains(dockItem)) {
-            dockItem.click();
-          }
+      // --- NAVIGATION ON TOUCH RELEASE ---
+      function navigateToSection(item) {
+        if (!item) return;
+        const targetId = item.getAttribute('href');
+        if (!targetId) return;
+
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.location.hash = targetId;
         }
-        // Reset hover pill
+      }
+
+      window.addEventListener('pointerup', (e) => {
+        const finalItem = currentlyHoveredItem || lastInteractedItem;
+
+        if (finalItem) {
+          navigateToSection(finalItem);
+        }
+
+        // Cleanup hover styling
         if (currentlyHoveredItem) {
-          currentlyHoveredItem.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
           currentlyHoveredItem.classList.remove('force-hover');
           currentlyHoveredItem = null;
         }
+        currentHover = null;
+        lastInteractedItem = null;
+      });
+
+      window.addEventListener('pointercancel', () => {
+        if (currentlyHoveredItem) {
+          currentlyHoveredItem.classList.remove('force-hover');
+          currentlyHoveredItem = null;
+        }
+        currentHover = null;
+        lastInteractedItem = null;
       });
   </script>
   <main class="max-w-5xl mx-auto px-6 py-12 md:py-20">
