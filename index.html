@@ -516,59 +516,46 @@
       });
     });
 
-    // --- UNIFIED MOUSE & TOUCH TRACKING FOR DOCK MAGNIFICATION & REFRACTION ---
-    function handlePointerMove(clientX, clientY) {
-      if (!dock || !glassCanvas) return;
-      
-      // 1. Update refraction light variables
-      const rect = dock.getBoundingClientRect();
-      const x = ((clientX - rect.left) / rect.width) * 100;
-      const y = ((clientY - rect.top) / rect.height) * 100;
-
-      glassCanvas.style.setProperty('--mouse-x', `${x}%`);
-      glassCanvas.style.setProperty('--mouse-y', `${y}%`);
-
-      // 2. Feed coordinates into your dock magnification physics loop
-      window.mouseX = clientX;
-      window.mouseY = clientY;
-    }
-
+    // --- GLOBAL PAGE MOUSE-FOLLOWING LIGHT REFRACTION ---
     window.addEventListener('mousemove', (e) => {
-      handlePointerMove(e.clientX, e.clientY);
-    });
-
-    window.addEventListener('touchstart', (e) => {
-      if (e.touches && e.touches[0]) {
-        handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
-      }
-    }, { passive: true });
-
-    window.addEventListener('touchmove', (e) => {
-      if (e.touches && e.touches[0]) {
-        handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
-      }
-    }, { passive: true });
-
-    // --- TOUCHSCREEN FRIENDLY SUPPORT FOR THE DOCK & LIGHT REFRACTION ---
-    window.addEventListener('touchmove', (e) => {
-      if (!e.touches[0]) return;
-      const touch = e.touches[0];
       const rect = dock.getBoundingClientRect();
       
-      // Calculate touch position relative to the dock's bounding box
-      const x = ((touch.clientX - rect.left) / rect.width) * 100;
-      const y = ((touch.clientY - rect.top) / rect.height) * 100;
+      // Calculate mouse position relative to the dock's bounding box from anywhere on the page
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
 
       // Apply coordinates to CSS variables on the glass canvas
       glassCanvas.style.setProperty('--mouse-x', `${x}%`);
       glassCanvas.style.setProperty('--mouse-y', `${y}%`);
-    }, { passive: true });
-
-    // Optional: Reset refraction light when touch ends
-    window.addEventListener('touchend', () => {
-      glassCanvas.style.setProperty('--mouse-x', `50%`);
-      glassCanvas.style.setProperty('--mouse-y', `0%`);
     });
+
+    // --- TOUCHSCREEN FRIENDLY SUPPORT FOR THE DOCK & LIGHT REFRACTION ---
+      function handlePointerMove(clientX, clientY) {
+        if (!dock || !glassCanvas) return;
+        
+        // 1. Update refraction light variables relative to the dock
+        const rect = dock.getBoundingClientRect();
+        const x = ((clientX - rect.left) / rect.width) * 100;
+        const y = ((clientY - rect.top) / rect.height) * 100;
+
+        glassCanvas.style.setProperty('--mouse-x', `${x}%`);
+        glassCanvas.style.setProperty('--mouse-y', `${y}%`);
+
+        // 2. Feed coordinates into your dock magnification physics loop
+        window.mouseX = clientX;
+        window.mouseY = clientY;
+      }
+
+      // Listen to pointer move globally (handles mouse, touch, and stylus seamlessly)
+      window.addEventListener('pointermove', (e) => {
+        handlePointerMove(e.clientX, e.clientY);
+      }, { passive: true });
+
+      // When the user lifts their finger or moves off the screen, 
+      // we deliberately DO NOT reset coordinates, so it stays frozen where you left it.
+      window.addEventListener('pointercancel', (e) => {
+        handlePointerMove(e.clientX, e.clientY);
+      }, { passive: true });
   </script>
   <main class="max-w-5xl mx-auto px-6 py-12 md:py-20">
 
