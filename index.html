@@ -516,27 +516,36 @@
       });
     });
 
-    // --- GLOBAL PAGE MOUSE & TOUCH-FOLLOWING LIGHT REFRACTION ---
-    function updateLightPosition(clientX, clientY) {
+    // --- UNIFIED MOUSE & TOUCH TRACKING FOR DOCK MAGNIFICATION & REFRACTION ---
+    function handlePointerMove(clientX, clientY) {
       if (!dock || !glassCanvas) return;
-      const rect = dock.getBoundingClientRect();
       
-      // Calculate position relative to the dock's bounding box from anywhere on the page
+      // 1. Update refraction light variables
+      const rect = dock.getBoundingClientRect();
       const x = ((clientX - rect.left) / rect.width) * 100;
       const y = ((clientY - rect.top) / rect.height) * 100;
 
-      // Apply coordinates to CSS variables on the glass canvas
       glassCanvas.style.setProperty('--mouse-x', `${x}%`);
       glassCanvas.style.setProperty('--mouse-y', `${y}%`);
+
+      // 2. Feed coordinates into your dock magnification physics loop
+      window.mouseX = clientX;
+      window.mouseY = clientY;
     }
 
     window.addEventListener('mousemove', (e) => {
-      updateLightPosition(e.clientX, e.clientY);
+      handlePointerMove(e.clientX, e.clientY);
     });
+
+    window.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches[0]) {
+        handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
 
     window.addEventListener('touchmove', (e) => {
       if (e.touches && e.touches[0]) {
-        updateLightPosition(e.touches[0].clientX, e.touches[0].clientY);
+        handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
       }
     }, { passive: true });
 
