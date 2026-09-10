@@ -264,6 +264,10 @@
         display: flex;
         align-items: center;
         transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        /* Block dragging and highlighting */
+        user-select: none;
+        -webkit-user-drag: none; 
+        -webkit-touch-callout: none;
       }
       
       /* Overrides the Tailwind w-10 h-10 classes on the inner dot container for mobile */
@@ -642,6 +646,8 @@
       // Touch/Pointer slide interaction
       if (dockContainer) {
         dockContainer.style.touchAction = 'none'; // Prevent page scroll while sliding on dock
+
+        dockContainer.addEventListener('dragstart', (e) => e.preventDefault());
 
         dockContainer.addEventListener('pointermove', (e) => {
           updateDockTracking(e.clientX, e.clientY);
