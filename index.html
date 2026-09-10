@@ -556,6 +556,52 @@
       window.addEventListener('pointercancel', (e) => {
         handlePointerMove(e.clientX, e.clientY);
       }, { passive: true });
+
+      // --- TOUCH-SLIDING & WATER DROP TRACKING FOR THE DOCK ---
+      let lastPointerX = 0;
+      let lastPointerY = 0;
+
+      function handlePointerMove(clientX, clientY) {
+        if (!dock || !glassCanvas) return;
+        
+        // Save coordinates for release action
+        lastPointerX = clientX;
+        lastPointerY = clientY;
+        
+        // 1. Update water drop refraction light coordinates relative to dock
+        const rect = dock.getBoundingClientRect();
+        const x =((clientX - rect.left) / rect.width) * 100;
+        const y = ((clientY - rect.top) / rect.height) * 100;
+
+        glassCanvas.style.setProperty('--mouse-x', `${x}%`);
+        glassCanvas.style.setProperty('--mouse-y', `${y}%`);
+
+        // 2. Feed coordinates into your dock magnification loop so items slide/grow under the finger
+        window.mouseX = clientX;
+        window.mouseY = clientY;
+      }
+
+      window.addEventListener('pointermove', (e) => {
+        handlePointerMove(e.clientX, e.clientY);
+      }, { passive: true });
+
+      // When the finger/pointer is lifted, select and trigger the icon the finger was last on
+      window.addEventListener('pointerup', (e) => {
+        if (!dock) return;
+        
+        // Find the element directly under the final touch/pointer coordinates
+        const targetElement = document.elementFromPoint(lastPointerX, lastPointerY);
+        
+        if (targetElement) {
+          // Look for the interactive dock item (button, link, or child within the dock)
+          const dockItem = targetElement.closest('button, a, .dock-icon');
+          
+          // Ensure it belongs inside the dock before clicking
+          if (dockItem && dock.contains(dockItem)) {
+            dockItem.click();
+          }
+        }
+      });
   </script>
   <main class="max-w-5xl mx-auto px-6 py-12 md:py-20">
 
