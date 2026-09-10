@@ -608,7 +608,6 @@
         return "Nice try! Permission denied: User is not in the sudoers file.";
       }
 
-      // Return null so it falls back to the exact command-not-found block
       return null;
     }
 
@@ -617,7 +616,6 @@
         const rawInput = terminalInput.value.trim();
         if (!rawInput) return;
 
-        // Print user input
         const userLine = document.createElement('div');
         userLine.innerHTML = `<span class="text-blue-600 dark:text-emerald-500">$</span> <span class="text-slate-900 dark:text-white">${escapeHtml(rawInput)}</span>`;
         terminalOutput.appendChild(userLine);
@@ -669,28 +667,52 @@
     window.addEventListener('resize', initCanvas);
     initCanvas();
 
-    // Mouse interaction state
-    let mouse = { x: -1000, y: -1000, active: false };
+    let pointer = { x: -1000, y: -1000, active: false };
 
     canvas.addEventListener('mousemove', (e) => {
       const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-      mouse.active = true;
+      pointer.x = e.clientX - rect.left;
+      pointer.y = e.clientY - rect.top;
+      pointer.active = true;
     });
 
     canvas.addEventListener('mouseleave', () => {
-      mouse.active = false;
-      mouse.x = -1000;
-      mouse.y = -1000;
+      pointer.active = false;
+      pointer.x = -1000;
+      pointer.y = -1000;
     });
 
     canvas.addEventListener('click', (e) => {
       const rect = canvas.getBoundingClientRect();
-      const cx = e.clientX - rect.left;
-      const cy = e.clientY - rect.top;
-      
-      // Create a shockwave impulse pushing nodes away
+      triggerShockwave(e.clientX - rect.left, e.clientY - rect.top);
+    });
+
+    canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      pointer.x = touch.clientX - rect.left;
+      pointer.y = touch.clientY - rect.top;
+      pointer.active = true;
+      triggerShockwave(pointer.x, pointer.y);
+    }, { passive: false });
+
+    canvas.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      pointer.x = touch.clientX - rect.left;
+      pointer.y = touch.clientY - rect.top;
+      pointer.active = true;
+    }, { passive: false });
+
+    canvas.addEventListener('touchend', () => {
+      pointer.active = false;
+      pointer.x = -1000;
+      pointer.y = -1000;
+    });
+
+    function triggerShockwave(cx, cy) {
       particles.forEach(p => {
         let dx = p.x - cx;
         let dy = p.y - cy;
@@ -701,9 +723,8 @@
           p.vy += Math.sin(angle) * 8;
         }
       });
-    });
+    }
 
-    // Particle Class representing Multi-Omics Latent Nodes
     class GenomicNode {
       constructor() {
         this.reset();
@@ -714,7 +735,6 @@
         this.vx = (Math.random() - 0.5) * 1.2;
         this.vy = (Math.random() - 0.5) * 1.2;
         this.radius = Math.random() * 2.5 + 1.5;
-        // Assign to one of 4 clusters (matching multi-omics subtype stratification concepts)
         this.cluster = Math.floor(Math.random() * 4);
         
         const colors = ['#38bdf8', '#34d399', '#818cf8', '#f43f5e'];
@@ -724,25 +744,21 @@
         this.x += this.vx;
         this.y += this.vy;
 
-        // Wrap boundaries
         if (this.x < 0) this.x = width;
         if (this.x > width) this.x = 0;
         if (this.y < 0) this.y = height;
         if (this.y > height) this.y = 0;
 
-        // Gentle mouse attraction/repulsion field
-        if (mouse.active) {
-          let dx = mouse.x - this.x;
-          let dy = mouse.y - this.y;
+        if (pointer.active) {
+          let dx = pointer.x - this.x;
+          let dy = pointer.y - this.y;
           let dist = Math.hypot(dx, dy);
           if (dist < 120) {
-            // Slight magnetic pull towards cursor
             this.vx += (dx / dist) * 0.05;
             this.vy += (dy / dist) * 0.05;
           }
         }
 
-        // Speed dampening to keep motion smooth
         this.vx *= 0.98;
         this.vy *= 0.98;
         if (Math.abs(this.vx) < 0.2) this.vx += (Math.random() - 0.5) * 0.5;
@@ -757,14 +773,12 @@
       }
     }
 
-    // Generate particle field
     const particleCount = Math.min(70, Math.floor((window.innerWidth * window.innerHeight) / 9000));
     let particles = Array.from({ length: particleCount }, () => new GenomicNode());
 
     function animate() {
       ctx.clearRect(0, 0, width, height);
 
-      // Draw connecting webs (Contrastive feature links)
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           let dx = particles[i].x - particles[j].x;
@@ -775,7 +789,6 @@
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            // Highlight connections if they belong to the same cluster
             let alpha = (1 - (dist / 90)) * 0.25;
             ctx.strokeStyle = particles[i].cluster === particles[j].cluster ? particles[i].color : 'rgba(148, 163, 184, 0.05)';
             ctx.lineWidth = particles[i].cluster === particles[j].cluster ? 0.8 : 0.3;
@@ -785,7 +798,6 @@
         }
       }
 
-      // Update and draw particles
       particles.forEach(p => {
         p.update();
         p.draw();
