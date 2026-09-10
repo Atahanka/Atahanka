@@ -211,7 +211,7 @@
       /* 1. Enhanced Deep Liquid Glass Material */
       .glass-fill {
         /* Uses dynamic CSS variables driven by your mouse position */
-        background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 35%, rgba(255, 255, 255, 0.15) 70%, rgba(255, 255, 255, 0.35) 100%);
+        background: radial-gradient(circle at var(--mouse-x, -500%) var(--mouse-y, 0%), rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 35%, rgba(255, 255, 255, 0.15) 70%, rgba(255, 255, 255, 0.35) 100%);
         backdrop-filter: blur(80px) saturate(400%) brightness(120%);
         -webkit-backdrop-filter: blur(80px) saturate(400%) brightness(120%);
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 
@@ -220,7 +220,7 @@
                     inset 0 0 30px rgba(255, 255, 255, 0.6);
       }
       .dark .glass-fill {
-        background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(255, 255, 255, 0.3) 0%, rgba(30, 41, 59, 0.6) 40%, rgba(15, 23, 42, 0.8) 100%);
+        background: radial-gradient(circle at var(--mouse-x, -500%) var(--mouse-y, 0%), rgba(255, 255, 255, 0.3) 0%, rgba(30, 41, 59, 0.6) 40%, rgba(15, 23, 42, 0.8) 100%);
         backdrop-filter: blur(80px) saturate(400%) brightness(110%);
         -webkit-backdrop-filter: blur(80px) saturate(400%) brightness(110%);
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 
@@ -1312,12 +1312,11 @@
       if (!terminalEl || !dock) return;
 
       const dockRect = dock.getBoundingClientRect();
-      const screenWidth = window.innerWidth;
+      const termRect = terminalEl.getBoundingClientRect();
 
-      // Instead of checking exact 2D box intersection (which causes bouncing when the bubble moves up),
-      // we only check the horizontal X-axis. If the dock's right edge encroaches into the last 100px 
-      // of the screen where the bubble lives, we push the bubble up.
-      if (dockRect.right > screenWidth - 100) {
+      // Compare the exact horizontal edges instead of hardcoded numbers.
+      // Add a 15px buffer so it gets pushed up *just before* they actually touch.
+      if (dockRect.right + 15 > termRect.left) {
         terminalEl.classList.add('dock-colliding');
       } else {
         terminalEl.classList.remove('dock-colliding');
