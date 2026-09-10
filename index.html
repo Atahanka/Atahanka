@@ -261,17 +261,17 @@
         align-items: center;
         transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
       }
-      .dock-item:hover, .dock-item.active {
+      .dock-item:hover, .dock-item.active, .dock-item.force-hover {
         width: 150px; 
       }
 
       /* 5. Dot Lighting */
       .dock-item .dot { transition: all 0.4s ease; }
-      .dock-item:hover .dot, .dock-item.active .dot {
+      .dock-item:hover .dot, .dock-item.active .dot, .dock-item.force-hover .dot {
         background-color: #2563eb; transform: scale(1.3);
         box-shadow: 0 0 12px rgba(37,99,235,0.8);
       }
-      .dark .dock-item:hover .dot, .dark .dock-item.active .dot {
+      .dark .dock-item:hover .dot, .dark .dock-item.active .dot, .dock-item.force-hover .dot {
         background-color: #34d399; box-shadow: 0 0 12px rgba(52,211,153,0.8);
       }
     </style>
@@ -558,63 +558,96 @@
       }, { passive: true });
 
       // --- ROBUST WATER DROP & DOCK SLIDE TRACKING ---
-      const dockContainer = dock || document.getElementById('dock') || document.querySelector('nav');
+      const dockContainer = document.getElementById('dock') || document.querySelector('nav');
       let lastPointerX = 0;
       let lastPointerY = 0;
+      let currentlyHoveredItem = null; // Tracks which icon the finger is currently dragging over
 
-      function handlePointerMove(clientX, clientY) {
+      function handlePointerMove(e) {
         if (!dockContainer || !glassCanvas) return;
+        
+        const clientX = e.clientX;
+        const clientY = e.clientY;
         
         lastPointerX = clientX;
         lastPointerY = clientY;
         
         const rect = dockContainer.getBoundingClientRect();
-        
-        // Calculate exact percentage of pointer inside the dock bounds
         const x = ((clientX - rect.left) / rect.width) * 100;
         const y = ((clientY - rect.top) / rect.height) * 100;
 
-        // Update the glass liquid refraction variables instantly
         glassCanvas.style.setProperty('--mouse-x', `${x}%`);
         glassCanvas.style.setProperty('--mouse-y', `${y}%`);
 
-        // Feed coordinates into your dock magnification physics loop
         window.mouseX = clientX;
         window.mouseY = clientY;
+
+        // Force the hover state to transfer during touch drags
+        const targetElement = document.elementFromPoint(clientX, clientY);
+        if (targetElement) {
+          const dockItem = targetElement.closest('button, a, .dock-icon, [role="tab"]');
+          
+          if (dockItem && dockContainer.contains(dockItem)) {
+            if (currentlyHoveredItem !== dockItem) {
+              // Remove hover state from the previous icon
+              if (currentlyHoveredItem) {
+                currentlyHoveredItem.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
+                currentlyHoveredItem.classList.remove('force-hover');
+              }
+              // Apply hover state to the new icon under the finger
+              currentlyHoveredItem = dockItem;
+              currentlyHoveredItem.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+              currentlyHoveredItem.classList.add('force-hover');
+            }
+          } else if (currentlyHoveredItem) {
+            // Finger slid off the dock items entirely
+            currentlyHoveredItem.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
+            currentlyHoveredItem.classList.remove('force-hover');
+            currentlyHoveredItem = null;
+          }
+        }
       }
 
       if (dockContainer) {
-        // Ensure touch actions allow smooth sliding without scrolling on mobile
-        dockContainer.style.touchAction = 'none';
-
-        dockContainer.addEventListener('pointermove', (e) => {
-          handlePointerMove(e.clientX, e.clientY);
-        }, { passive: true });
-
-        dockContainer.addEventListener('pointerenter', (e) => {
-          handlePointerMove(e.clientX, e.clientY);
-        }, { passive: true });
+        dockContainer.style.touchAction = 'none'; // Prevents scrolling while sliding
+        dockContainer.addEventListener('pointermove', handlePointerMove, { passive: true });
+        dockContainer.addEventListener('pointerenter', handlePointerMove, { passive: true });
+        
+        // Cleanup when finger is lifted
+        dockContainer.addEventListener('pointerleave', () => {
+          if (currentlyHoveredItem) {
+              currentlyHoveredItem.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
+              currentlyHoveredItem.classList.remove('force-hover');
+              currentlyHoveredItem = null;
+          }
+        });
       }
 
+      // Keep global tracking for the light
       window.addEventListener('pointermove', (e) => {
-        // If pointer is near or over the dock area, update physics
-        if (dockContainer) {
+        if (dockContainer && !dockContainer.contains(e.target)) {
           const rect = dockContainer.getBoundingClientRect();
-          // Generous bounds check so water drop approaches smoothly from nearby
           if (e.clientY >= rect.top - 100 && e.clientY <= rect.bottom + 100) {
-            handlePointerMove(e.clientX, e.clientY);
+            handlePointerMove(e);
           }
         }
       }, { passive: true });
 
+      // Open the tab when the finger is lifted
       window.addEventListener('pointerup', (e) => {
         if (!dockContainer) return;
         const targetElement = document.elementFromPoint(lastPointerX, lastPointerY);
         if (targetElement) {
-          const dockItem = targetElement.closest('button, a, .dock-icon');
+          const dockItem = targetElement.closest('button, a, .dock-icon, [role="tab"]');
           if (dockItem && dockContainer.contains(dockItem)) {
             dockItem.click();
           }
+        }
+        // Reset hover pill
+        if (currentlyHoveredItem) {
+          currentlyHoveredItem.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
+          currentlyHoveredItem.classList.remove('force-hover');
+          currentlyHoveredItem = null;
         }
       });
   </script>
