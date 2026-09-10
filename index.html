@@ -71,7 +71,7 @@
     }
 
     .animate-attention {
-      animation: attentionShake 1.2s ease-in-out 3; /* Shakes 3 times on load */
+      animation: attentionShake 1.2s ease-in-out infinite; /* To shake 3 times change infinite to 3 */
     }
   </style>
 
@@ -528,7 +528,7 @@
       </div>
 
       <!-- Floating Bubble Button -->
-      <button onclick="toggleTerminal()" 
+      <button id="terminal-bubble" onclick="toggleTerminal()" 
               class="flex items-center gap-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-white px-4 py-3 rounded-full shadow-lg border border-slate-200 dark:border-slate-800 hover:scale-105 transition-all group animate-attention">
         <svg class="w-5 h-5 text-blue-600 dark:text-emerald-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
         <span class="text-xs font-semibold tracking-wide">Terminal</span>
@@ -538,7 +538,7 @@
 
     <!-- 🧬 BIO-GENOMIC PARTICLE SYNTHESISER -->
     <section class="mb-16">
-      <h3 class="text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2 mb-4 flex items-center justify-between">
+      <h3 class="text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2 mb-4 flex items-center">
         <span>Multi-Omics Contrastive Cluster Synthesizer</span>
       </h3>
       
@@ -709,6 +709,18 @@
 
     function escapeHtml(text) {
       return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // --- STOP TERMINAL BUBBLE ANIMATION ON CLICK ---
+    const terminalBubble = document.getElementById('terminal-bubble');
+    if (terminalBubble) {
+      terminalBubble.addEventListener('click', () => {
+        terminalBubble.classList.remove('animate-attention');
+        const icon = terminalBubble.querySelector('svg');
+        if (icon) {
+          icon.classList.remove('animate-pulse');
+        }
+      }, { once: true });
     }
   </script>
 
