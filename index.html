@@ -516,17 +516,49 @@
       });
     });
 
-    // --- GLOBAL PAGE MOUSE-FOLLOWING LIGHT REFRACTION ---
-    window.addEventListener('mousemove', (e) => {
+    // --- GLOBAL PAGE MOUSE & TOUCH-FOLLOWING LIGHT REFRACTION ---
+    function updateLightPosition(clientX, clientY) {
+      if (!dock || !glassCanvas) return;
       const rect = dock.getBoundingClientRect();
       
-      // Calculate mouse position relative to the dock's bounding box from anywhere on the page
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      // Calculate position relative to the dock's bounding box from anywhere on the page
+      const x = ((clientX - rect.left) / rect.width) * 100;
+      const y = ((clientY - rect.top) / rect.height) * 100;
 
       // Apply coordinates to CSS variables on the glass canvas
       glassCanvas.style.setProperty('--mouse-x', `${x}%`);
       glassCanvas.style.setProperty('--mouse-y', `${y}%`);
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      updateLightPosition(e.clientX, e.clientY);
+    });
+
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches[0]) {
+        updateLightPosition(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+
+    // --- TOUCHSCREEN FRIENDLY SUPPORT FOR THE DOCK & LIGHT REFRACTION ---
+    window.addEventListener('touchmove', (e) => {
+      if (!e.touches[0]) return;
+      const touch = e.touches[0];
+      const rect = dock.getBoundingClientRect();
+      
+      // Calculate touch position relative to the dock's bounding box
+      const x = ((touch.clientX - rect.left) / rect.width) * 100;
+      const y = ((touch.clientY - rect.top) / rect.height) * 100;
+
+      // Apply coordinates to CSS variables on the glass canvas
+      glassCanvas.style.setProperty('--mouse-x', `${x}%`);
+      glassCanvas.style.setProperty('--mouse-y', `${y}%`);
+    }, { passive: true });
+
+    // Optional: Reset refraction light when touch ends
+    window.addEventListener('touchend', () => {
+      glassCanvas.style.setProperty('--mouse-x', `50%`);
+      glassCanvas.style.setProperty('--mouse-y', `0%`);
     });
   </script>
   <main class="max-w-5xl mx-auto px-6 py-12 md:py-20">
