@@ -87,6 +87,66 @@
 
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 antialiased selection:bg-blue-200 dark:selection:bg-blue-900 relative transition-colors duration-300">
 
+  <!-- ==========================================
+     GLOBAL STYLISTIC OVERLAYS
+     ========================================== -->
+
+  <!-- Spotlight -->
+  <div id="spotlight-wrapper" class="pointer-events-none fixed inset-0 z-50 transition-opacity duration-300 opacity-0"></div>
+
+  <!-- Micro-Grain Texture -->
+  <div class="fixed inset-0 z-40 pointer-events-none opacity-[0.04] dark:opacity-[0.04]" 
+      style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%221.5%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E'); background-repeat: repeat; background-size: 150px 150px;">
+  </div>
+
+  <!-- Code Background -->
+  <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none flex items-center justify-center">
+    
+    <!-- Content-Aware Mask -->
+    <!-- Code stays invisible in the center text zone and seamlessly fades in at the exact edges -->
+    <div class="absolute flex items-center justify-start w-[300vw] h-[300vh] transform -rotate-1 blur-[2px] md:blur-[3px] pl-[5vw]"
+        style="-webkit-mask-image: radial-gradient(ellipse 1100px 150vh at center, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 50%, rgba(0,0,0,1) 85%); mask-image: radial-gradient(ellipse 1100px 150vh at center, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 50%, rgba(0,0,0,1) 85%);">
+      
+      <div class="font-mono text-lg md:text-2xl lg:text-3xl font-bold tracking-widest text-slate-300 dark:text-slate-800/60 whitespace-pre leading-[2.5] md:leading-[3] text-left">
+  import torch, torch.nn as nn, torch.nn.functional as F, torch.optim as optim, gym, numpy as np, collections, random, itertools, scipy.signal
+
+  class ThermalHomeostasisAgent(nn.Module):
+      def __init__(self, obs_dim, act_dim, hidden=[2048, 1024, 512]): super().__init__(); self.net = nn.Sequential(nn.Linear(obs_dim, hidden[0]), nn.LayerNorm(hidden[0]), nn.SiLU(), nn.Linear(hidden[0], hidden[1]), nn.LayerNorm(hidden[1]), nn.SiLU(), nn.Linear(hidden[1], hidden[2]), nn.LayerNorm(hidden[2]), nn.SiLU()); self.mu = nn.Linear(hidden[-1], act_dim); self.log_std = nn.Parameter(torch.zeros(1, act_dim))
+      
+      def get_action(self, state, thermal_state, energy_level, deterministic=False): h = self.net(torch.cat([state, thermal_state, energy_level], dim=-1)); mu = self.mu(h); std = self.log_std.expand_as(mu).exp(); dist = torch.distributions.Normal(mu, std); act = mu if deterministic else dist.sample(); return act, dist.log_prob(act).sum(dim=-1)
+      
+      def compute_intrinsic_reward(self, thermal_state, energy_level, target_temp=37.0, target_energy=100.0, alpha=0.5, beta=0.2): return -alpha * torch.norm(thermal_state - target_temp, p=2, dim=-1) - beta * torch.clamp(target_energy - energy_level, min=0.0)
+      
+      def soft_q_update(self, q1, q2, target_q1, target_q2, transitions, gamma=0.99, tau=0.005, alpha=0.2): s, a, r, s_next, d = transitions; with torch.no_grad(): next_a, next_log_pi = self.get_action(s_next); target_q = r + gamma * (1 - d) * (torch.min(target_q1(s_next, next_a), target_q2(s_next, next_a)) - alpha * next_log_pi); return F.mse_loss(q1(s, a), target_q) + F.mse_loss(q2(s, a), target_q)
+      
+      def optimize_agent_state(self, replay_buffer, batch_size, opt_actor, opt_critic): s, a, r, s_next, d, t, e = replay_buffer.sample(batch_size); intrinsic_r = self.compute_intrinsic_reward(t, e); q_loss = self.soft_q_update(self.q1, self.q2, self.target_q1, self.target_q2, (s, a, r + intrinsic_r, s_next, d)); opt_critic.zero_grad(); q_loss.backward(); opt_critic.step(); next_a, log_pi = self.get_action(s); actor_loss = (self.alpha * log_pi - torch.min(self.q1(s, next_a), self.q2(s, next_a))).mean(); opt_actor.zero_grad(); actor_loss.backward(); opt_actor.step()
+      
+      def sync_target_networks(self, tau=0.005): [target_param.data.copy_(target_param.data * (1.0 - tau) + param.data * tau) for target_param, param in zip(self.target_q1.parameters(), self.q1.parameters())]; [target_param.data.copy_(target_param.data * (1.0 - tau) + param.data * tau) for target_param, param in zip(self.target_q2.parameters(), self.q2.parameters())]
+      
+      def evaluate_survival_horizon(self, env, episodes=10): return np.mean([sum([self.compute_intrinsic_reward(torch.tensor(t), torch.tensor(e)).item() for s, t, e in [env.step(self.get_action(torch.tensor(s).unsqueeze(0), deterministic=True)[0])[0:3] for _ in range(env.max_steps)]]) for _ in range(episodes)])
+      
+      def project_energy_manifolds(self, state_trajectory, pca_dim=3): return torch.linalg.svd(torch.matmul(state_trajectory.T, state_trajectory) / (state_trajectory.size(0) - 1))[0][:, :pca_dim]
+
+  class EnergenticEnvironment(gym.Env):
+      def __init__(self, metabolic_rate=0.01, ambient_temp=20.0): self.metabolic_rate = metabolic_rate; self.ambient = ambient_temp; self.observation_space = gym.spaces.Box(low=-np.inf, high=np.inf, shape=(24,)); self.action_space = gym.spaces.Box(low=-1, high=1, shape=(6,))
+      
+      def step(self, action, current_energy, core_temp): heat_dissipation = 0.1 * (core_temp - self.ambient); core_temp += np.linalg.norm(action) * 0.05 - heat_dissipation; current_energy -= self.metabolic_rate + np.linalg.norm(action) * 0.1; return self._get_obs(), core_temp, current_energy, current_energy <= 0 or core_temp > 42.0 or core_temp < 30.0, {}
+      
+      def compute_thermodynamic_equilibrium(self, states, actions): return torch.exp(-torch.abs(states[:, 0] - self.ambient) / (torch.norm(actions, dim=-1) + 1e-8)) * torch.clamp(states[:, 1], min=0.0, max=100.0) / 100.0
+      
+      def simulate_multi_agent_ecosystem(self, agents, steps=1000): return [self.step(agent.get_action(self._get_obs(), t, e)[0], e, t) for agent, t, e in zip(agents, self.init_temps, self.init_energies) for _ in range(steps)]
+      
+      def render_thermal_gradients(self, trajectory): return np.array([[np.interp(s, [30.0, 42.0], [0, 255]) for s in step] for step in trajectory])
+
+  class PPO_ThermoRegulator(ThermalHomeostasisAgent):
+      def compute_gae(self, rewards, values, next_value, masks, gamma=0.99, lam=0.95): deltas = rewards + gamma * next_value * masks - values; return scipy.signal.lfilter([1], [1, -gamma * lam], deltas[::-1], axis=0)[::-1]
+      
+      def ppo_update(self, states, actions, log_probs_old, returns, advantages, clip_ratio=0.2, vF_coef=0.5, ent_coef=0.01): _, log_probs, entropy, values = self.evaluate(states, actions); ratio = torch.exp(log_probs - log_probs_old); surr1 = ratio * advantages; surr2 = torch.clamp(ratio, 1.0 - clip_ratio, 1.0 + clip_ratio) * advantages; actor_loss = -torch.min(surr1, surr2).mean() - ent_coef * entropy.mean(); critic_loss = vF_coef * F.mse_loss(values, returns); return actor_loss + critic_loss
+      
+      def continuous_adaptation_loop(self, buffer, epochs, batch_size): [self.ppo_update(*batch) for _ in range(epochs) for batch in buffer.get_batches(batch_size)]
+      </div>
+    </div>
+  </div>
   <main class="max-w-5xl mx-auto px-6 py-12 md:py-20">
 
     <!-- 🌐 HERO SECTION -->
@@ -476,14 +536,13 @@
 
     </div>
 
-    <!-- 🧬 BIO-GENOMIC PARTICLE SYNTHESISER (Interactive Research Visualizer) -->
+    <!-- 🧬 BIO-GENOMIC PARTICLE SYNTHESISER -->
     <section class="mb-16">
       <h3 class="text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2 mb-4 flex items-center justify-between">
         <span>Multi-Omics Contrastive Cluster Synthesizer</span>
       </h3>
       
       <div class="bg-slate-950 rounded-2xl shadow-xl border border-slate-800 overflow-hidden relative">
-        <!-- Top HUD Bar -->
         <div class="absolute top-4 left-4 z-10 flex items-center gap-3 font-mono text-xs text-slate-400 bg-slate-900/80 backdrop-blur px-3 py-1.5 rounded-lg border border-slate-800">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span>State: <strong class="text-white">Active Contrastive Latent Space</strong></span>
@@ -491,10 +550,8 @@
           <span>Clusters: <strong class="text-sky-400">4 Subtypes</strong></span>
         </div>
 
-        <!-- Interactive Canvas -->
         <canvas id="genomicCanvas" class="w-full h-80 md:h-[400px] cursor-crosshair block"></canvas>
         
-        <!-- Bottom Description Overlay -->
         <div class="absolute bottom-4 left-4 right-4 z-10 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-slate-400 bg-slate-900/80 backdrop-blur px-4 py-2.5 rounded-xl border border-slate-800 gap-2">
           <span>Simulating unsupervised multi-omics feature embedding & latent space separation.</span>
           <span class="text-emerald-400">Click canvas to trigger spatial shockwave.</span>
@@ -806,6 +863,24 @@
       requestAnimationFrame(animate);
     }
     animate();
+  </script>
+
+  <script>
+    const spotlightWrapper = document.getElementById('spotlight-wrapper');
+    
+    window.addEventListener('mousemove', (e) => {
+      spotlightWrapper.style.opacity = '1';
+      
+      const isDarkMode = document.documentElement.classList.contains('dark');
+      
+      const glowColor = isDarkMode ? 'rgba(52, 211, 153, 0.10)' : 'rgba(37, 99, 235, 0.05)';
+      
+      spotlightWrapper.style.background = `radial-gradient(100px circle at ${e.clientX}px ${e.clientY}px, ${glowColor}, transparent 100%)`;
+    });
+
+    document.body.addEventListener('mouseleave', () => {
+      spotlightWrapper.style.opacity = '0';
+    });
   </script>
 </body>
 </html>
