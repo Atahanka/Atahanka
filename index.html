@@ -557,47 +557,62 @@
         handlePointerMove(e.clientX, e.clientY);
       }, { passive: true });
 
-      // --- TOUCH-SLIDING & WATER DROP TRACKING FOR THE DOCK ---
+      // --- ROBUST WATER DROP & DOCK SLIDE TRACKING ---
+      const dockContainer = dock || document.getElementById('dock') || document.querySelector('nav');
       let lastPointerX = 0;
       let lastPointerY = 0;
 
       function handlePointerMove(clientX, clientY) {
-        if (!dock || !glassCanvas) return;
+        if (!dockContainer || !glassCanvas) return;
         
-        // Save coordinates for release action
         lastPointerX = clientX;
         lastPointerY = clientY;
         
-        // 1. Update water drop refraction light coordinates relative to dock
-        const rect = dock.getBoundingClientRect();
-        const x =((clientX - rect.left) / rect.width) * 100;
+        const rect = dockContainer.getBoundingClientRect();
+        
+        // Calculate exact percentage of pointer inside the dock bounds
+        const x = ((clientX - rect.left) / rect.width) * 100;
         const y = ((clientY - rect.top) / rect.height) * 100;
 
+        // Update the glass liquid refraction variables instantly
         glassCanvas.style.setProperty('--mouse-x', `${x}%`);
         glassCanvas.style.setProperty('--mouse-y', `${y}%`);
 
-        // 2. Feed coordinates into your dock magnification loop so items slide/grow under the finger
+        // Feed coordinates into your dock magnification physics loop
         window.mouseX = clientX;
         window.mouseY = clientY;
       }
 
+      if (dockContainer) {
+        // Ensure touch actions allow smooth sliding without scrolling on mobile
+        dockContainer.style.touchAction = 'none';
+
+        dockContainer.addEventListener('pointermove', (e) => {
+          handlePointerMove(e.clientX, e.clientY);
+        }, { passive: true });
+
+        dockContainer.addEventListener('pointerenter', (e) => {
+          handlePointerMove(e.clientX, e.clientY);
+        }, { passive: true });
+      }
+
       window.addEventListener('pointermove', (e) => {
-        handlePointerMove(e.clientX, e.clientY);
+        // If pointer is near or over the dock area, update physics
+        if (dockContainer) {
+          const rect = dockContainer.getBoundingClientRect();
+          // Generous bounds check so water drop approaches smoothly from nearby
+          if (e.clientY >= rect.top - 100 && e.clientY <= rect.bottom + 100) {
+            handlePointerMove(e.clientX, e.clientY);
+          }
+        }
       }, { passive: true });
 
-      // When the finger/pointer is lifted, select and trigger the icon the finger was last on
       window.addEventListener('pointerup', (e) => {
-        if (!dock) return;
-        
-        // Find the element directly under the final touch/pointer coordinates
+        if (!dockContainer) return;
         const targetElement = document.elementFromPoint(lastPointerX, lastPointerY);
-        
         if (targetElement) {
-          // Look for the interactive dock item (button, link, or child within the dock)
           const dockItem = targetElement.closest('button, a, .dock-icon');
-          
-          // Ensure it belongs inside the dock before clicking
-          if (dockItem && dock.contains(dockItem)) {
+          if (dockItem && dockContainer.contains(dockItem)) {
             dockItem.click();
           }
         }
