@@ -73,6 +73,61 @@
     .animate-attention {
       animation: attentionShake 1.2s ease-in-out infinite; /* To shake 3 times change infinite to 3 */
     }
+
+    .terminal-bubble, #terminal-bubble {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.5rem; 
+      z-index: 40; 
+      transition: bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* When collision is detected, push the terminal completely up out of the way */
+    .terminal-bubble.dock-colliding, #terminal-bubble.dock-colliding {
+      bottom: 5.5rem; /* Adjust this height if it needs to go higher */
+    }
+  </style>
+
+  <style>
+    /* Automatically shift any blue elements/accents to green when dark mode is active */
+    .dark .text-blue-400, .dark .text-blue-500, .dark .text-blue-600 {
+      color: #34d399 !important; /* Tail-wind emerald-400 equivalent */
+    }
+    
+    .dark .bg-blue-500, .dark .bg-blue-600 {
+      background-color: #059669 !important;
+    }
+
+    /* Universal fallback: Shifts any generic inline-styled blue elements to green via color hue rotation */
+    .dark [style*="blue"], 
+    .dark [style*="#3b82f6"], 
+    .dark [style*="rgb(59, 130, 246)"], 
+    .dark [style*="rgb(0, 0, 255)"] {
+      filter: hue-rotate(110deg) saturate(1.3) !important;
+    }
+
+    /* 1. Force project card border to turn green on hover in dark mode */
+    .dark .group:hover, 
+    .dark .project-card:hover, 
+    .dark [class*="border-blue-"]:hover {
+      border-color: #34d399 !important;
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.2) !important;
+    }
+
+    .group:hover, 
+    .project-card:hover, 
+    [class*="border-blue-"]:hover {
+      border-color: #3b82f6 !important; /* Tailwind blue-500 */
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.2) !important;
+    }
+
+    .dark .project-card .bg-blue-50, 
+    .dark .project-card .bg-blue-900\/30,
+    .dark .project-card .text-blue-600,
+    .dark .project-card .text-blue-400 {
+      background-color: rgba(6, 95, 70, 0.25) !important;
+      color: #34d399 !important;
+    }
   </style>
 
   <script>
@@ -147,10 +202,337 @@
       </div>
     </div>
   </div>
+
+  <!-- Abstract Mathematical Liquid Glass Dock (Context-Aware & Fully Synchronized) -->
+  <nav id="liquid-glass-dock" class="fixed z-30 transition-all duration-500 w-max"
+      style="filter: drop-shadow(0 20px 40px rgba(0,0,0,0.25));">
+
+    <style>
+      /* 1. Enhanced Deep Liquid Glass Material */
+      .glass-fill {
+        /* Uses dynamic CSS variables driven by your mouse position */
+        background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 35%, rgba(255, 255, 255, 0.15) 70%, rgba(255, 255, 255, 0.35) 100%);
+        backdrop-filter: blur(80px) saturate(400%) brightness(120%);
+        -webkit-backdrop-filter: blur(80px) saturate(400%) brightness(120%);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 
+                    inset 0 2px 4px rgba(255, 255, 255, 1), 
+                    inset 0 -2px 6px rgba(0, 0, 0, 0.1),
+                    inset 0 0 30px rgba(255, 255, 255, 0.6);
+      }
+      .dark .glass-fill {
+        background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(255, 255, 255, 0.3) 0%, rgba(30, 41, 59, 0.6) 40%, rgba(15, 23, 42, 0.8) 100%);
+        backdrop-filter: blur(80px) saturate(400%) brightness(110%);
+        -webkit-backdrop-filter: blur(80px) saturate(400%) brightness(110%);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 
+                    inset 0 2px 4px rgba(255, 255, 255, 0.4), 
+                    inset 0 -2px 6px rgba(0, 0, 0, 0.4),
+                    inset 0 0 30px rgba(255, 255, 255, 0.1);
+      }
+
+      /* 2. Responsive Placement */
+      #liquid-glass-dock {
+        bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      }
+      #liquid-glass-dock.dock-vertical {
+        bottom: auto; top: 50%; left: 1.5rem; transform: translateY(-50%);
+      }
+
+      /* 3. The Interior Water Drop */
+      #water-drop {
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: inset 0 1px 2px rgba(255,255,255,0.9), 0 4px 12px rgba(0,0,0,0.15);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        pointer-events: none;
+        z-index: 2;
+      }
+      .dark #water-drop {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: inset 0 1px 2px rgba(255,255,255,0.3), 0 4px 12px rgba(0,0,0,0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      /* 4. Physical Item Stretching */
+      .dock-item {
+        width: 40px; 
+        height: 40px;
+        border-radius: 9999px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .dock-item:hover, .dock-item.active {
+        width: 150px; 
+      }
+
+      /* 5. Dot Lighting */
+      .dock-item .dot { transition: all 0.4s ease; }
+      .dock-item:hover .dot, .dock-item.active .dot {
+        background-color: #2563eb; transform: scale(1.3);
+        box-shadow: 0 0 12px rgba(37,99,235,0.8);
+      }
+      .dark .dock-item:hover .dot, .dark .dock-item.active .dot {
+        background-color: #34d399; box-shadow: 0 0 12px rgba(52,211,153,0.8);
+      }
+    </style>
+
+    <!-- LAYER 1: The Glass Shape (Clip-path handles both horizontal pill & vertical L-shape) -->
+    <div id="glass-canvas" class="absolute inset-0 glass-fill" style="z-index: 1;"></div>
+
+    <!-- LAYER 2: The Unified Vector Stroke (Delivers the exact same bright shine in both modes) -->
+    <svg id="glass-border-container" class="absolute inset-0 pointer-events-none" style="width: 100%; height: 100%; overflow: visible; z-index: 3; filter: drop-shadow(0 1px 2px rgba(255,255,255,0.4));">
+      <path id="glass-border" fill="none" stroke="rgba(255, 255, 255, 0.75)" stroke-width="1.5" />
+    </svg>
+
+    <!-- LAYER 3: The Independent Water Drop Hover -->
+    <div id="water-drop" class="absolute rounded-full opacity-0"></div>
+
+    <!-- LAYER 4: Navigation Items Matching Your Real Website Sections -->
+    <div id="dock-items" class="relative z-10 flex pt-1 pb-1 px-2 gap-2">
+      
+      <a href="#about" data-section="about" class="dock-item cursor-pointer">
+        <div class="w-10 h-10 flex items-center justify-center flex-shrink-0"><div class="dot w-2 h-2 rounded-full bg-slate-400"></div></div>
+        <span class="whitespace-nowrap text-xs font-semibold tracking-wide text-slate-800 dark:text-slate-200 pl-2">About</span>
+      </a>
+
+      <a href="#overview" data-section="overview" class="dock-item cursor-pointer">
+        <div class="w-10 h-10 flex items-center justify-center flex-shrink-0"><div class="dot w-2 h-2 rounded-full bg-slate-400"></div></div>
+        <span class="whitespace-nowrap text-xs font-semibold tracking-wide text-slate-800 dark:text-slate-200 pl-2">Overview</span>
+      </a>
+      
+      <a href="#projects" data-section="projects" class="dock-item cursor-pointer">
+        <div class="w-10 h-10 flex items-center justify-center flex-shrink-0"><div class="dot w-2 h-2 rounded-full bg-slate-400"></div></div>
+        <span class="whitespace-nowrap text-xs font-semibold tracking-wide text-slate-800 dark:text-slate-200 pl-2">Projects</span>
+      </a>
+      
+      <a href="#domains" data-section="domains" class="dock-item cursor-pointer">
+        <div class="w-10 h-10 flex items-center justify-center flex-shrink-0"><div class="dot w-2 h-2 rounded-full bg-slate-400"></div></div>
+        <span class="whitespace-nowrap text-xs font-semibold tracking-wide text-slate-800 dark:text-slate-200 pl-2">Domains</span>
+      </a>
+      
+      <a href="#tools" data-section="tools" class="dock-item cursor-pointer">
+        <div class="w-10 h-10 flex items-center justify-center flex-shrink-0"><div class="dot w-2 h-2 rounded-full bg-slate-400"></div></div>
+        <span class="whitespace-nowrap text-xs font-semibold tracking-wide text-slate-800 dark:text-slate-200 pl-2">Tools</span>
+      </a>
+
+      <a href="#analytics" data-section="analytics" class="dock-item cursor-pointer">
+        <div class="w-10 h-10 flex items-center justify-center flex-shrink-0"><div class="dot w-2 h-2 rounded-full bg-slate-400"></div></div>
+        <span class="whitespace-nowrap text-xs font-semibold tracking-wide text-slate-800 dark:text-slate-200 pl-2">Analytics</span>
+      </a>
+
+      <a href="#simulator" data-section="simulator" class="dock-item cursor-pointer">
+        <div class="w-10 h-10 flex items-center justify-center flex-shrink-0"><div class="dot w-2 h-2 rounded-full bg-slate-400"></div></div>
+        <span class="whitespace-nowrap text-xs font-semibold tracking-wide text-slate-800 dark:text-slate-200 pl-2">Simulator</span>
+      </a>
+
+    </div>
+  </nav>
+
+  <script>
+    const dock = document.getElementById('liquid-glass-dock');
+    const itemsContainer = document.getElementById('dock-items');
+    const glassCanvas = document.getElementById('glass-canvas');
+    const glassBorder = document.getElementById('glass-border');
+    const waterDrop = document.getElementById('water-drop');
+    
+    const navLinks = document.querySelectorAll('.dock-item');
+    const sections = document.querySelectorAll('section[id], div[id="about"], div[id="overview"], div[id="projects"], div[id="domains"], div[id="tools"], div[id="analytics"], div[id="simulator"]');
+    
+    let currentHover = null;
+    let forceHorizontalContext = false;
+    let isVertical = false;
+
+    // --- CONTEXT-AWARE & RESPONSIVE LAYOUT SWITCHER ---
+    function checkDockLayout() {
+      const isDesktopWidth = window.innerWidth >= 1280;
+      isVertical = isDesktopWidth && !forceHorizontalContext;
+
+      if (isVertical) {
+        dock.classList.add('dock-vertical');
+        itemsContainer.style.flexDirection = 'column';
+        itemsContainer.style.padding = '24px 4px';
+      } else {
+        dock.classList.remove('dock-vertical');
+        itemsContainer.style.flexDirection = 'row';
+        itemsContainer.style.padding = '4px 8px';
+      }
+    }
+
+    window.addEventListener('resize', checkDockLayout);
+
+    // --- PAGE CONTEXT OBSERVER ---
+    const contextObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.target.id === 'contact' || entry.target.classList.contains('footer-zone')) {
+          forceHorizontalContext = entry.isIntersecting;
+          checkDockLayout();
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const contactSection = document.querySelector('#contact, div[id="contact"]');
+    if (contactSection) contextObserver.observe(contactSection);
+
+    checkDockLayout();
+
+    // --- UNIFIED GEOMETRY RENDERER ---
+    function createLiquidPath(w, y, h, totalW, totalH, vertical) {
+      if (!vertical) {
+        const R = totalH / 2;
+        return `M ${R} 0 L ${totalW - R} 0 A ${R} ${R} 0 0 1 ${totalW} ${R} A ${R} ${R} 0 0 1 ${totalW - R} ${totalH} L ${R} ${totalH} A ${R} ${R} 0 0 1 0 ${totalH - R} A ${R} ${R} 0 0 1 ${R} 0 Z`;
+      }
+
+      const SW = 48; 
+      const R = 24;  
+      
+      // If the arm width is almost closed, cleanly return the base stem path to avoid pinching
+      if (w <= SW + 25) {
+        return `M ${R} 0 A ${R} ${R} 0 0 1 ${SW} ${R} L ${SW} ${totalH-R} A ${R} ${R} 0 0 1 ${R} ${totalH} A ${R} ${R} 0 0 1 0 ${totalH-R} L 0 ${R} A ${R} ${R} 0 0 1 ${R} 0 Z`;
+      }
+
+      const armR = h / 2; 
+      const rTop = Math.max(0, Math.min(12, y - R));
+      const rBot = Math.max(0, Math.min(12, totalH - R - (y + h)));
+
+      let path = `M ${R} 0 A ${R} ${R} 0 0 1 ${SW} ${R} `;
+
+      if (rTop > 0) {
+        path += `L ${SW} ${y - rTop} A ${rTop} ${rTop} 0 0 0 ${SW + rTop} ${y} `;
+      } else {
+        path += `L ${SW} ${y} `;
+      }
+
+      path += `L ${w - armR} ${y} A ${armR} ${armR} 0 0 1 ${w} ${y + armR} A ${armR} ${armR} 0 0 1 ${w - armR} ${y + h} `;
+
+      if (rBot > 0) {
+        path += `L ${SW + rBot} ${y + h} A ${rBot} ${rBot} 0 0 0 ${SW} ${y + h + rBot} `;
+      } else {
+        path += `L ${SW} ${y + h} `;
+      }
+
+      path += `L ${SW} ${totalH - R} A ${R} ${R} 0 0 1 ${R} ${totalH} A ${R} ${R} 0 0 1 0 ${totalH - R} L 0 ${R} A ${R} ${R} 0 0 1 ${R} 0 Z`;
+
+      return path;
+    }
+
+    // --- FRAME ENGINE ---
+    let currentShape = { w: 48, y: 24, h: 40 };
+    let dropShape = { x: 4, y: 24, w: 40, h: 40, o: 0 };
+
+    function renderFrame() {
+      const targetEl = currentHover || document.querySelector('.dock-item.active');
+      
+      // 1. Water Drop Physics
+      let tX = dropShape.x, tY = dropShape.y, tW = dropShape.w, tH = dropShape.h, tO = 0;
+      if (currentHover) {
+        tX = currentHover.offsetLeft;
+        tY = currentHover.offsetTop;
+        tW = currentHover.offsetWidth;
+        tH = currentHover.offsetHeight;
+        tO = 1; 
+      }
+
+      dropShape.x += (tX - dropShape.x) * 0.18;
+      dropShape.y += (tY - dropShape.y) * 0.18;
+      dropShape.w += (tW - dropShape.w) * 0.18;
+      dropShape.h += (tH - dropShape.h) * 0.18;
+      dropShape.o += (tO - dropShape.o) * 0.18;
+
+      waterDrop.style.transform = `translate(${dropShape.x}px, ${dropShape.y}px)`;
+      waterDrop.style.width = `${dropShape.w}px`;
+      waterDrop.style.height = `${dropShape.h}px`;
+      waterDrop.style.opacity = dropShape.o;
+
+      // 2. Outer Glass & Vector Stroke Renderer based on active layout context
+      const totalW = itemsContainer.offsetWidth;
+      const totalH = itemsContainer.offsetHeight;
+
+      if (isVertical) {
+        let glassW = 48;
+        // Retain current position instead of hardcoding '24' (top) when unhovered
+        let glassY = currentShape.y; 
+        let glassH = currentShape.h;
+        
+        if (targetEl) {
+          glassW = targetEl.offsetLeft + targetEl.offsetWidth;
+          glassY = targetEl.offsetTop;
+          glassH = targetEl.offsetHeight;
+        }
+
+        currentShape.w += (glassW - currentShape.w) * 0.2;
+        currentShape.y += (glassY - currentShape.y) * 0.2;
+        currentShape.h += (glassH - currentShape.h) * 0.2;
+
+        const pathString = createLiquidPath(currentShape.w, currentShape.y, currentShape.h, totalW, totalH, true);
+        
+        glassCanvas.style.webkitClipPath = `path('${pathString}')`;
+        glassCanvas.style.clipPath = `path('${pathString}')`;
+        glassBorder.setAttribute('d', pathString);
+        glassBorder.setAttribute('stroke', document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.08)');
+      } else {
+        const pathString = createLiquidPath(0, 0, 0, totalW, totalH, false);
+        
+        glassCanvas.style.webkitClipPath = `path('${pathString}')`;
+        glassCanvas.style.clipPath = `path('${pathString}')`;
+        glassBorder.setAttribute('d', pathString);
+        glassBorder.setAttribute('stroke', document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.1)' : 'rgba(15, 23, 42, 0.08)');
+      }
+      
+      requestAnimationFrame(renderFrame);
+    }
+    
+    requestAnimationFrame(renderFrame);
+
+    // --- LISTENERS & SMOOTH SCROLLING ---
+    navLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => currentHover = link);
+      link.addEventListener('mouseleave', () => currentHover = null);
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+          // Smoothly scrolls directly to the section element on your page
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          // Fallback if the ID doesn't match an element on the page yet
+          window.location.hash = targetId;
+        }
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= (sectionTop - sectionHeight / 3)) current = section.getAttribute('id');
+      });
+
+      navLinks.forEach(link => {
+        if (link.getAttribute('data-section') === current) link.classList.add('active');
+        else link.classList.remove('active');
+      });
+    });
+
+    // --- GLOBAL PAGE MOUSE-FOLLOWING LIGHT REFRACTION ---
+    window.addEventListener('mousemove', (e) => {
+      const rect = dock.getBoundingClientRect();
+      
+      // Calculate mouse position relative to the dock's bounding box from anywhere on the page
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+      // Apply coordinates to CSS variables on the glass canvas
+      glassCanvas.style.setProperty('--mouse-x', `${x}%`);
+      glassCanvas.style.setProperty('--mouse-y', `${y}%`);
+    });
+  </script>
   <main class="max-w-5xl mx-auto px-6 py-12 md:py-20">
 
     <!-- 🌐 HERO SECTION -->
-    <header class="text-center mb-16 relative">
+    <header id="about" class="text-center mb-16 relative">
       <img src="assets/profile.jpeg" alt="Atahan Karagöz" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full mx-auto shadow-lg border-4 border-white dark:border-slate-800 mb-6 transition-colors">
       <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white tracking-tight">Atahan Karagöz</h1>
       <h2 class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mt-3 font-medium">Software Engineer &middot; AI Researcher</h2>
@@ -189,7 +571,7 @@
     </header>
 
     <!-- 🚀 WHAT I DO -->
-    <section class="mb-16">
+    <section id="overview" class="mb-16">
       <h3 class="text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2 mb-6">Overview</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-700 dark:text-slate-300">
         <div class="flex items-start gap-3 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
@@ -212,12 +594,12 @@
     </section>
 
     <!-- 🧪 PROJECTS GRID -->
-    <section class="mb-16">
+    <section id="projects" class="mb-16">
       <h3 class="text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2 mb-6">Featured Projects</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
         <!-- OmicsCL -->
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition">
+        <div class="project-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition">
           <div class="flex items-center gap-3 mb-3">
             <div class="p-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
@@ -230,7 +612,7 @@
         </div>
 
         <!-- ADAFAIREA -->
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition">
+        <div class="project-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition">
           <div class="flex items-center gap-3 mb-3">
             <div class="p-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
@@ -243,7 +625,7 @@
         </div>
 
         <!-- X-Ray Scatter -->
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition">
+        <div class="project-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition">
           <div class="flex items-center gap-3 mb-3">
             <div class="p-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
@@ -256,7 +638,7 @@
         </div>
 
         <!-- PictoSort -->
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition">
+        <div class="project-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition">
           <div class="flex items-center gap-3 mb-3">
             <div class="p-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -269,7 +651,7 @@
         </div>
 
         <!-- SOSM -->
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition">
+        <div class="project-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition">
           <div class="flex items-center gap-3 mb-3">
             <div class="p-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477-4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
@@ -282,7 +664,7 @@
         </div>
 
         <!-- Prime Sum -->
-        <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition">
+        <div class="project-card bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition">
           <div class="flex items-center gap-3 mb-3">
             <div class="p-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path></svg>
@@ -298,7 +680,7 @@
     </section>
 
     <!-- 🧠 DOMAINS -->
-    <section class="mb-16">
+    <section id="domains" class="mb-16">
       <h3 class="text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2 mb-6">Domains of Interest</h3>
       <ul class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-slate-700 dark:text-slate-300">
         <li class="flex items-start gap-2">
@@ -325,7 +707,7 @@
     </section>
 
     <!-- 🛠 TOOLS & TECH -->
-    <section class="mb-16">
+    <section id="tools" class="mb-16">
       <h3 class="text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2 mb-6">Tech Stack & Tools</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
@@ -483,13 +865,14 @@
     </section>
 
     <!-- 📈 STATS -->
-    <section class="mb-16">
+    <section id="analytics" class="mb-16">
       <h3 class="text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2 mb-6">GitHub Analytics</h3>
       <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex justify-center">
-        <!-- Light Mode Image -->
+        <!-- Light Mode Image (Keeps blue accent) -->
         <img src="https://github-activity-chart.vercel.app/graph?username=Atahanka&custom_title=Commit%20Activity%20Graph&bg_color=ffffff&color=0f172a&line=2563eb&point=3b82f6&area=true&area_color=dbeafe&hide_border=true" class="w-full max-w-4xl rounded-lg block dark:hidden" alt="GitHub Commit Graph (Light)" />
-        <!-- Dark Mode Image -->
-        <img src="https://github-activity-chart.vercel.app/graph?username=Atahanka&custom_title=Commit%20Activity%20Graph&bg_color=1e293b&color=f8fafc&line=3b82f6&point=60a5fa&area=true&area_color=1e3a8a&hide_border=true" class="w-full max-w-4xl rounded-lg hidden dark:block" alt="GitHub Commit Graph (Dark)" />
+        
+        <!-- Dark Mode Image (Updated parameters to Emerald Green: line=34d399, point=34d399, area_color=064e3b) -->
+        <img src="https://github-activity-chart.vercel.app/graph?username=Atahanka&custom_title=Commit%20Activity%20Graph&bg_color=1e293b&color=f8fafc&line=34d399&point=34d399&area=true&area_color=064e3b&hide_border=true" class="w-full max-w-4xl rounded-lg hidden dark:block" alt="GitHub Commit Graph (Dark)" />
       </div>
     </section>
 
@@ -529,7 +912,7 @@
 
       <!-- Floating Bubble Button -->
       <button id="terminal-bubble" onclick="toggleTerminal()" 
-              class="flex items-center gap-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-white px-4 py-3 rounded-full shadow-lg border border-slate-200 dark:border-slate-800 hover:scale-105 transition-all group animate-attention">
+              class="flex items-center gap-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-white px-4 py-4 rounded-full shadow-lg border border-slate-200 dark:border-slate-800 hover:scale-105 transition-all group animate-attention">
         <svg class="w-5 h-5 text-blue-600 dark:text-emerald-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
         <span class="text-xs font-semibold tracking-wide">Terminal</span>
       </button>
@@ -537,7 +920,7 @@
     </div>
 
     <!-- 🧬 BIO-GENOMIC PARTICLE SYNTHESISER -->
-    <section class="mb-16">
+    <section id="simulator" class="mb-16">
       <h3 class="text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2 mb-4 flex items-center">
         <span>Multi-Omics Contrastive Cluster Synthesizer</span>
       </h3>
@@ -583,10 +966,36 @@
     
     let isMaximized = false;
 
+    // --- DYNAMIC TERMINAL WINDOW ANCHORING ---
+    function positionTerminalWindow() {
+      const bubbleIcon = document.getElementById('terminal-bubble') || document.querySelector('.terminal-bubble');
+      
+      if (!bubbleIcon || !terminalWindow) return;
+
+      // Get the current screen coordinates of the bubble icon
+      const bubbleRect = bubbleIcon.getBoundingClientRect();
+      const windowWidth = terminalWindow.offsetWidth;
+
+      // Center the terminal window horizontally relative to the bubble icon, and place it directly above with a 14px gap
+      let leftPos = bubbleRect.left + (bubbleRect.width / 2) - (windowWidth / 2);
+      
+      // Safety check to prevent the terminal window from overflowing off the left/right screen edges
+      const padding = 16;
+      if (leftPos < padding) leftPos = padding;
+      if (leftPos + windowWidth > window.innerWidth - padding) {
+        leftPos = window.innerWidth - windowWidth - padding;
+      }
+
+      terminalWindow.style.position = 'fixed';
+      terminalWindow.style.left = `${leftPos}px`;
+      terminalWindow.style.bottom = `${window.innerHeight - bubbleRect.top - 8}px`;
+    }
+
     function toggleTerminal() {
       const isHidden = terminalWindow.classList.contains('hidden');
       if (isHidden) {
         terminalWindow.classList.remove('hidden');
+        positionTerminalWindow(); // Dynamically anchor right above its bubble wherever it sits
         terminalInput.focus();
       } else {
         terminalWindow.classList.add('hidden');
@@ -612,6 +1021,7 @@
         terminalOutput.classList.remove('h-[60vh]');
         terminalOutput.classList.add('h-56');
       }
+      positionTerminalWindow(); // Re-adjust anchor center point if maximized
     }
 
     function getTerminalResponse(query) {
@@ -630,7 +1040,7 @@
       }
 
       if (q.includes('simulation') || q.includes('synthesizer') || q.includes('canvas') || q.includes('particles') || q.includes('visual')) {
-        return "Interactive Multi-Omics Synthesizer (Canvas Widget):\n  - What it is: A live particle physics simulation embedded on the page.\n  - What it models: It visually simulates unsupervised multi-omics feature embedding, latent space separation, and contrastive cluster formation—inspired directly by the OmicsCL research framework for cancer subtype discovery[cite: 1].\n  - Try it: Move your cursor across the canvas or click to trigger spatial shockwaves!";
+        return "Interactive Multi-Omics Synthesizer (Canvas Widget):\n  - What it is: A live particle physics simulation embedded on the page.\n  - What it models: It visually simulates unsupervised multi-omics feature embedding, latent space separation, and contrastive cluster formation—inspired directly by the OmicsCL research framework for cancer subtype discovery.\n  - Try it: Move your cursor across the canvas or click to trigger spatial shockwaves!";
       }
       
       if (q.includes('pub') || q.includes('paper') || q.includes('scholar') || q.includes('orcid') || q.includes('academia') || q.includes('research')) {
@@ -722,6 +1132,49 @@
         }
       }, { once: true });
     }
+
+    // --- DYNAMIC TERMINAL COLLISION DETECTOR ---
+    const terminalEl = document.querySelector('.terminal-bubble, #terminal-bubble');
+
+    function checkTerminalCollision() {
+      if (!terminalEl || !dock) return;
+
+      const dockRect = dock.getBoundingClientRect();
+      const termRect = terminalEl.getBoundingClientRect();
+
+      // Add a 20px safety buffer around the dock to prevent jittery edge-case toggling
+      const buffer = 20;
+      const isColliding = !(
+        termRect.right < dockRect.left - buffer ||
+        termRect.left > dockRect.right + buffer ||
+        termRect.bottom < dockRect.top - buffer ||
+        termRect.top > dockRect.bottom + buffer
+      );
+
+      // If they touch/overlap, add the class to lift the terminal up
+      if (isColliding) {
+        terminalEl.classList.add('dock-colliding');
+      } else {
+        terminalEl.classList.remove('dock-colliding');
+      }
+
+      // If terminal window is open, keep its position synchronized live as the bubble moves
+      if (terminalWindow && !terminalWindow.classList.contains('hidden')) {
+        positionTerminalWindow();
+      }
+    }
+
+    // Hook the collision check into your existing requestAnimationFrame loop or a scroll/resize listener
+    window.addEventListener('scroll', checkTerminalCollision);
+    window.addEventListener('resize', () => {
+      checkTerminalCollision();
+      if (terminalWindow && !terminalWindow.classList.contains('hidden')) {
+        positionTerminalWindow();
+      }
+    });
+    
+    // Run it periodically or inside your renderFrame loop if you want it real-time
+    setInterval(checkTerminalCollision, 150);
   </script>
 
   <script>
@@ -885,7 +1338,7 @@
       
       const isDarkMode = document.documentElement.classList.contains('dark');
       
-      const glowColor = isDarkMode ? 'rgba(52, 211, 153, 0.10)' : 'rgba(37, 99, 235, 0.05)';
+      const glowColor = isDarkMode ? 'rgba(52, 211, 153, 0.01)' : 'rgba(37, 99, 235, 0.01)';
       
       spotlightWrapper.style.background = `radial-gradient(100px circle at ${e.clientX}px ${e.clientY}px, ${glowColor}, transparent 100%)`;
     });
