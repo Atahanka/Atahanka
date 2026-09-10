@@ -1312,26 +1312,19 @@
       if (!terminalEl || !dock) return;
 
       const dockRect = dock.getBoundingClientRect();
-      const termRect = terminalEl.getBoundingClientRect();
+      const screenWidth = window.innerWidth;
 
-      // Add a 20px safety buffer around the dock to prevent jittery edge-case toggling
-      const buffer = 20;
-      const isColliding = !(
-        termRect.right < dockRect.left - buffer ||
-        termRect.left > dockRect.right + buffer ||
-        termRect.bottom < dockRect.top - buffer ||
-        termRect.top > dockRect.bottom + buffer
-      );
-
-      // If they touch/overlap, add the class to lift the terminal up
-      if (isColliding) {
+      // Instead of checking exact 2D box intersection (which causes bouncing when the bubble moves up),
+      // we only check the horizontal X-axis. If the dock's right edge encroaches into the last 100px 
+      // of the screen where the bubble lives, we push the bubble up.
+      if (dockRect.right > screenWidth - 100) {
         terminalEl.classList.add('dock-colliding');
       } else {
         terminalEl.classList.remove('dock-colliding');
       }
 
       // If terminal window is open, keep its position synchronized live as the bubble moves
-      if (terminalWindow && !terminalWindow.classList.contains('hidden')) {
+      if (typeof terminalWindow !== 'undefined' && terminalWindow && !terminalWindow.classList.contains('hidden')) {
         positionTerminalWindow();
       }
     }
