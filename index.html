@@ -304,13 +304,25 @@
       }
 
       /* 5. Dot Lighting */
-      .dock-item .dot { transition: all 0.4s ease; }
-      .dock-item:hover .dot, .dock-item.active .dot, .dock-item.force-hover .dot {
-        background-color: #2563eb; transform: scale(1.3);
-        box-shadow: 0 0 12px rgba(37,99,235,0.8);
+      .dock-item .dot { 
+        transition: all 0.4s ease; 
       }
-      .dark .dock-item:hover .dot, .dark .dock-item.active .dot, .dock-item.force-hover .dot {
-        background-color: #34d399; box-shadow: 0 0 12px rgba(52,211,153,0.8);
+      
+      /* LIGHT MODE (Blue) */
+      .dock-item:hover .dot, 
+      .dock-item.active .dot, 
+      .dock-item.force-hover .dot {
+        background-color: #2563eb !important; 
+        transform: scale(1.3);
+        box-shadow: 0 0 12px rgba(37,99,235,0.8) !important;
+      }
+      
+      /* DARK MODE (Green) - specifically targets .dark for every state */
+      .dark .dock-item:hover .dot, 
+      .dark .dock-item.active .dot, 
+      .dark .dock-item.force-hover .dot {
+        background-color: #34d399 !important; 
+        box-shadow: 0 0 12px rgba(52,211,153,0.8) !important;
       }
     </style>
 
