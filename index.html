@@ -204,7 +204,7 @@
   </div>
 
   <!-- Abstract Mathematical Liquid Glass Dock (Context-Aware & Fully Synchronized) -->
-  <nav id="liquid-glass-dock" class="fixed z-30 transition-all duration-500 w-max"
+  <nav id="liquid-glass-dock" class="fixed z-30 w-max"
       style="filter: drop-shadow(0 20px 40px rgba(0,0,0,0.25));">
 
     <style>
@@ -233,8 +233,20 @@
       #liquid-glass-dock {
         bottom: 1.5rem; left: 50%; transform: translateX(-50%);
       }
+      
+      /* Natively default to vertical on desktop screens so it renders instantly in place */
+      @media (min-width: 1280px) {
+        #liquid-glass-dock:not(.dock-horizontal) {
+          bottom: auto; top: 50%; left: 1.5rem; transform: translateY(-50%);
+        }
+      }
+
+      /* Explicit overrides for when JavaScript toggles the layout */
       #liquid-glass-dock.dock-vertical {
         bottom: auto; top: 50%; left: 1.5rem; transform: translateY(-50%);
+      }
+      #liquid-glass-dock.dock-horizontal {
+        bottom: 1.5rem !important; top: auto !important; left: 50% !important; transform: translateX(-50%) !important;
       }
 
       /* 3. The Interior Water Drop */
@@ -399,13 +411,23 @@
 
       if (isVertical) {
         dock.classList.add('dock-vertical');
+        dock.classList.remove('dock-horizontal');
         itemsContainer.style.flexDirection = 'column';
         itemsContainer.style.padding = '24px 4px';
       } else {
         dock.classList.remove('dock-vertical');
+        dock.classList.add('dock-horizontal');
         itemsContainer.style.flexDirection = 'row';
         itemsContainer.style.padding = '4px 8px';
       }
+
+      // Add the animation class AFTER the initial position is locked.
+      // This stops it from "flying" across the screen on page refresh.
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          dock.classList.add('transition-all', 'duration-500');
+        }, 50);
+      });
     }
 
     window.addEventListener('resize', checkDockLayout);
