@@ -1010,22 +1010,22 @@
     </section>
 
     <!-- 📰 PRESS & COVERAGE CAROUSEL -->
-    <section id="press" class="mb-16 relative">
+    <section id="press" class="mb-16 relative w-full overflow-hidden md:overflow-visible">
       <h3 class="text-2xl font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-700 pb-2 mb-6">Press & Coverage</h3>
       
       <!-- Carousel Group Wrapper -->
-      <div class="relative group">
+      <div class="relative group w-full">
         
-        <!-- Left Arrow -->
-        <button id="press-prev" class="absolute -left-3 md:-left-5 top-1/2 -translate-y-1/2 z-20 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 w-10 h-10 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hover:text-blue-600 dark:hover:text-emerald-400">
+        <!-- Left Arrow (Visible on Mobile) -->
+        <button id="press-prev" class="absolute left-2 md:-left-5 top-1/2 -translate-y-1/2 z-20 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 w-10 h-10 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hover:text-blue-600 dark:hover:text-emerald-400">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
         </button>
 
-        <!-- Scroll Track with Heavy Edge Fade Mask -->
+        <!-- Scroll Track -->
         <div id="press-track" class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar py-4 px-6 press-fade-mask">
           
           <!-- Dev.to -->
-          <div class="project-card flex-none w-[85vw] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
+          <div class="project-card flex-none w-[80vw] sm:w-[320px] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
             <div>
               <svg class="w-6 h-6 text-blue-100 dark:text-emerald-900/30 mb-3 transform -translate-x-1" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
               <p class="text-slate-700 dark:text-slate-300 italic text-sm leading-relaxed mb-6">
@@ -1041,7 +1041,7 @@
           </div>
 
           <!-- The Science Archive -->
-          <div class="project-card flex-none w-[85vw] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
+          <div class="project-card flex-none w-[80vw] sm:w-[320px] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
             <div>
               <svg class="w-6 h-6 text-blue-100 dark:text-emerald-900/30 mb-3 transform -translate-x-1" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
               <p class="text-slate-700 dark:text-slate-300 italic text-sm leading-relaxed mb-6">
@@ -1057,7 +1057,7 @@
           </div>
 
           <!-- ResearchGate -->
-          <div class="project-card flex-none w-[85vw] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
+          <div class="project-card flex-none w-[80vw] sm:w-[320px] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
             <div>
               <svg class="w-6 h-6 text-blue-100 dark:text-emerald-900/30 mb-3 transform -translate-x-1" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
               <p class="text-slate-700 dark:text-slate-300 italic text-sm leading-relaxed mb-6">
@@ -1073,7 +1073,7 @@
           </div>
           
           <!-- YouTube 1 -->
-          <div class="project-card flex-none w-[85vw] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
+          <div class="project-card flex-none w-[80vw] sm:w-[320px] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
             <div>
               <svg class="w-6 h-6 text-blue-100 dark:text-emerald-900/30 mb-3 transform -translate-x-1" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
               <p class="text-slate-700 dark:text-slate-300 italic text-sm leading-relaxed mb-6">
@@ -1089,7 +1089,7 @@
           </div>
 
           <!-- SciPaperMill -->
-          <div class="project-card flex-none w-[85vw] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
+          <div class="project-card flex-none w-[80vw] sm:w-[320px] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
             <div>
               <svg class="w-6 h-6 text-blue-100 dark:text-emerald-900/30 mb-3 transform -translate-x-1" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
               <p class="text-slate-700 dark:text-slate-300 italic text-sm leading-relaxed mb-6">
@@ -1105,7 +1105,7 @@
           </div>
 
           <!-- WordPress Blog -->
-          <div class="project-card flex-none w-[85vw] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
+          <div class="project-card flex-none w-[80vw] sm:w-[320px] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
             <div>
               <svg class="w-6 h-6 text-blue-100 dark:text-emerald-900/30 mb-3 transform -translate-x-1" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
               <p class="text-slate-700 dark:text-slate-300 italic text-sm leading-relaxed mb-6">
@@ -1121,7 +1121,7 @@
           </div>
 
           <!-- Supdev -->
-          <div class="project-card flex-none w-[85vw] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
+          <div class="project-card flex-none w-[80vw] sm:w-[320px] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
             <div>
               <svg class="w-6 h-6 text-blue-100 dark:text-emerald-900/30 mb-3 transform -translate-x-1" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
               <p class="text-slate-700 dark:text-slate-300 italic text-sm leading-relaxed mb-6">
@@ -1137,7 +1137,7 @@
           </div>
 
           <!-- YouTube 2 -->
-          <div class="project-card flex-none w-[85vw] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
+          <div class="project-card flex-none w-[80vw] sm:w-[320px] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
             <div>
               <svg class="w-6 h-6 text-blue-100 dark:text-emerald-900/30 mb-3 transform -translate-x-1" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
               <p class="text-slate-700 dark:text-slate-300 italic text-sm leading-relaxed mb-6">
@@ -1153,7 +1153,7 @@
           </div>
 
           <!-- Financial Times Research Spotlight -->
-          <div class="project-card flex-none w-[85vw] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
+          <div class="project-card flex-none w-[80vw] sm:w-[320px] md:w-[340px] snap-center flex flex-col justify-between bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 transition relative">
             <div>
               <span class="inline-block px-2.5 py-1 mb-3 text-[10px] font-bold tracking-wider uppercase bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full">In Progress</span>
               <p class="text-slate-700 dark:text-slate-300 italic text-sm leading-relaxed mb-6">
@@ -1169,8 +1169,8 @@
           </div>
         </div>
 
-        <!-- Right Arrow -->
-        <button id="press-next" class="absolute -right-3 md:-right-5 top-1/2 -translate-y-1/2 z-20 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 w-10 h-10 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hover:text-blue-600 dark:hover:text-emerald-400">
+        <!-- Right Arrow (Visible on Mobile) -->
+        <button id="press-next" class="absolute right-2 md:-right-5 top-1/2 -translate-y-1/2 z-20 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 w-10 h-10 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-0 hover:text-blue-600 dark:hover:text-emerald-400">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
         </button>
 
@@ -1839,90 +1839,109 @@
   </script>
 
   <script>
-    // --- CLEAN SEQUENTIAL INFINITE PRESS CAROUSEL ---
+    // --- RESPONSIVE INFINITE PRESS CAROUSEL ---
     const pressTrack = document.getElementById('press-track');
     const pressPrev = document.getElementById('press-prev');
     const pressNext = document.getElementById('press-next');
 
     if (pressTrack && pressPrev && pressNext) {
-      // Clean up any existing duplicate nodes if re-running
+      // 1. Identify original cards
       const originalCards = Array.from(pressTrack.querySelectorAll('.project-card:not([data-clone])'));
+      const numCards = originalCards.length;
       
-      // Clear track and rebuild cleanly to prevent double cloning
-      pressTrack.innerHTML = '';
-      
-      // Create a 3-set buffer: [Clone Set] [Original Set] [Clone Set]
+      // 2. Clear and clone for the infinite loop illusion (3 sets: Left Buffer, Originals, Right Buffer)
       const clonesBefore = originalCards.map(card => {
         const clone = card.cloneNode(true);
         clone.setAttribute('data-clone', 'true');
+        clone.setAttribute('aria-hidden', 'true');
         return clone;
       });
       
       const clonesAfter = originalCards.map(card => {
         const clone = card.cloneNode(true);
         clone.setAttribute('data-clone', 'true');
+        clone.setAttribute('aria-hidden', 'true');
         return clone;
       });
 
-      // Append all sets in correct order
-      [...clonesBefore, ...originalCards, ...clonesAfter].forEach(card => {
-        pressTrack.appendChild(card);
-      });
+      // 3. Rebuild the track cleanly: [Clones] [Originals] [Clones]
+      pressTrack.innerHTML = '';
+      [...clonesBefore, ...originalCards, ...clonesAfter].forEach(card => pressTrack.appendChild(card));
 
-      const cardWidth = 364; // Card width (340px) + gap (24px)
-      const singleSetWidth = cardWidth * originalCards.length;
+      // Utility: Get the exact pixel width of one full set of cards
+      function getSetWidth() {
+        const firstOriginal = pressTrack.children[numCards];
+        const firstRightClone = pressTrack.children[numCards * 2];
+        return firstRightClone.offsetLeft - firstOriginal.offsetLeft;
+      }
 
-      // Center the first item precisely on load with clean snap alignment
+      // 4. Mathematical Perfect Center Initialization (Run once on load)
       function initCarouselPosition() {
-        pressTrack.style.scrollBehavior = 'auto';
-        pressTrack.scrollLeft = singleSetWidth;
-        pressTrack.style.scrollBehavior = 'smooth';
+        pressTrack.style.scrollBehavior = 'auto'; 
+        
+        const firstOriginal = pressTrack.children[numCards];
+        const targetScrollLeft = firstOriginal.offsetLeft - (pressTrack.clientWidth / 2) + (firstOriginal.offsetWidth / 2);
+        
+        pressTrack.scrollLeft = targetScrollLeft;
 
-        // Unlock mandatory snapping immediately after load so manual swiping is 100% fluid
-        setTimeout(() => {
-          pressTrack.classList.remove('snap-x', 'snap-mandatory');
-        }, 100);
+        requestAnimationFrame(() => {
+          pressTrack.style.scrollBehavior = 'smooth';
+        });
       }
 
       window.addEventListener('load', initCarouselPosition);
+      window.addEventListener('resize', () => {
+        clearTimeout(window.resizeTimer);
+        window.resizeTimer = setTimeout(initCarouselPosition, 150);
+      });
       setTimeout(initCarouselPosition, 50);
 
-      const scrollAmount = cardWidth;
-
+      // 5. Arrow controls
       pressPrev.addEventListener('click', () => {
+        const gap = parseFloat(window.getComputedStyle(pressTrack).gap) || 24;
+        const scrollAmount = originalCards[0].offsetWidth + gap;
         pressTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
       });
 
       pressNext.addEventListener('click', () => {
+        const gap = parseFloat(window.getComputedStyle(pressTrack).gap) || 24;
+        const scrollAmount = originalCards[0].offsetWidth + gap;
         pressTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
       });
 
-      // Seamless infinite loop boundary check
-      let isAdjustmentPending = false;
-      pressTrack.addEventListener('scroll', () => {
-        if (isAdjustmentPending) return;
+      // 6. Scroll-End Infinite Loop (Guarantees zero snapping glitches)
+      const handleInfiniteLoop = () => {
+        const currentScroll = pressTrack.scrollLeft;
+        const setWidth = getSetWidth();
+        
+        const leftBoundary = pressTrack.children[numCards].offsetLeft - (pressTrack.clientWidth / 2);
+        const rightBoundary = pressTrack.children[numCards * 2].offsetLeft - (pressTrack.clientWidth / 2);
 
-        // If scrolled past the middle set into the right clones, reset back left
-        if (pressTrack.scrollLeft >= singleSetWidth * 2) {
-          isAdjustmentPending = true;
+        // If resting in the right clone buffer, silently jump back to the original set
+        if (currentScroll >= rightBoundary) {
           pressTrack.style.scrollBehavior = 'auto';
-          pressTrack.scrollLeft -= singleSetWidth;
-          requestAnimationFrame(() => {
-            pressTrack.style.scrollBehavior = 'smooth';
-            isAdjustmentPending = false;
-          });
+          pressTrack.scrollLeft -= setWidth;
+          pressTrack.style.scrollBehavior = 'smooth';
         } 
-        // If scrolled past the middle set into the left clones, reset back right
-        else if (pressTrack.scrollLeft <= 5) {
-          isAdjustmentPending = true;
+        // If resting in the left clone buffer, silently jump forward to the original set
+        else if (currentScroll <= leftBoundary) {
           pressTrack.style.scrollBehavior = 'auto';
-          pressTrack.scrollLeft += singleSetWidth;
-          requestAnimationFrame(() => {
-            pressTrack.style.scrollBehavior = 'smooth';
-            isAdjustmentPending = false;
-          });
+          pressTrack.scrollLeft += setWidth;
+          pressTrack.style.scrollBehavior = 'smooth';
         }
-      });
+      };
+
+      // Modern scrollend event triggers precisely when momentum stops completely
+      if ('onscrollend' in window) {
+        pressTrack.addEventListener('scrollend', handleInfiniteLoop);
+      } else {
+        // Fallback for older browsers using a debounce timer
+        let scrollTimeout;
+        pressTrack.addEventListener('scroll', () => {
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(handleInfiniteLoop, 150);
+        }, { passive: true });
+      }
     }
   </script>
 </body>
